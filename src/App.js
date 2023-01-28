@@ -1,34 +1,33 @@
-import React from 'react';
-import useFetch from './component/useFecth';
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext } from 'react';
+import { useState } from 'react';
+//import useFetch from './component/useFecth';
+import Question from './component/Question';
+import OptionAnswer from './component/OptionAnswer';
+import { numbers, } from './component/OptionAnswer';
+import { asking, numberRandom } from './component/Question';
+const ContContext = createContext();
 
-function App(){
-  //const data = useFetch('https://restcountries.com/v2/all');
-  //console.log(data)
-  
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+function App() {
+  const [cont, setCont] = useState(0);
+  const [option, setOption] = useState(numbers());
+  const [textQuestion, setTextQuestion] = useState(asking(numberRandom()));
+  return (
+    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion }}>
+      <section className="App">
+        <div>
+          <h1>Country Quiz</h1>
+          <img src='' alt='world picture'/>  
         </div>
-        <p className="App-intro" 
-          onClick={()=>{
-            console.log(numbers())
-          }}
-        >
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+        <div className='questionSection'>
+          <Question />
+          <OptionAnswer />
+        </div>
+      </section>
+    </ContContext.Provider>
+  );
 }
-function numberRandom(){
-  return Math.floor(Math.random()*4);
-}
-function numbers(){
-  return Array(4).fill().map((a, i) => a = i).sort(() => Math.random() - 0.5)
-}
+export { ContContext }
+
 /*
 function shuffle(array) {
   var tmp, current, top = array.length;
@@ -41,6 +40,9 @@ function shuffle(array) {
   return array;
 }
 
+function numberRandom(){
+  return Math.floor(Math.random()*4);
+}
 */
 
 
