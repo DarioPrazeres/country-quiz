@@ -1,24 +1,31 @@
-*{
+* {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background: url(../src/img/background.png);
   background-repeat: repeat;
+  font-family: 'Poppins';
 }
+
 /*---------APP Style-------*/
-.body{
+.body {
   border: solid red 1px;
 }
-.questionSection{
+
+.questionSection {
   background: white;
-  width: 500px;
+  width: 464px;
+  height: 515px;
+  border-radius: 24px;
 }
-.App{
+
+.App {
   width: 100vw;
   height: 95vh;
   border: solid 1px black;
@@ -27,15 +34,21 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 /*-----------Option Style ------------*/
-.option button{
+.option button {
   width: 400px;
   height: 56px;
   border: 2px solid rgba(96, 102, 208, 0.7);
   background: none;
   border-radius: 12px;
   display: flex;
+  color: rgba(96, 102, 208, 0.7);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
 }
+
 /*-----------Footer --------------*/
 footer {
   margin-top: 5px;

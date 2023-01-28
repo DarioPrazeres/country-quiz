@@ -8,7 +8,6 @@ function OptionAnswer() {
     console.log(option)
     return (
         <div className="option">
-            <h1>Respostas</h1>
             <button onClick={() => {
                 setOption(c => c = numbers());
                 showValue(option[0]);
