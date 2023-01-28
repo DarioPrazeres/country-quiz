@@ -80,7 +80,7 @@ h1 {
   font-weight: 500;
   font-size: 18px;
   line-height: 27px;
-  margin: 15px 0px 15px 0px;
+  margin: 15px 0px 15px 7px;
   padding-left: 4px;
 }
 
@@ -92,11 +92,10 @@ footer {
 
 footer p {
   text-align: center;
-  color: rgba(255, 255, 255, 0.592);
+  color: #F2F2F2;
   font-size: 16px;
 }
 
 footer a {
   color: white;
-  text-decoration: none;
 }

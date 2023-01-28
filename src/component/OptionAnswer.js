@@ -4,31 +4,27 @@ import { ContContext } from "../App";
 import { asking, numberRandom } from "./Question";
 function OptionAnswer() {
     const { option, setOption, setTextQuestion } = useContext(ContContext);
-
+    function controlOption(num){
+        setOption(c => c = numbers());
+        showValue(option[num]);
+        setTextQuestion((t)=> t=asking(numberRandom()));
+    }
     console.log(option)
     return (
         <div className="option">
             <button onClick={() => {
-                setOption(c => c = numbers());
-                showValue(option[0]);
-                setTextQuestion((t)=> t=asking(numberRandom()));
+                controlOption(0)
             }}>A <p>{option[0]}</p></button>
             <button onClick={() => {
-                setOption(c => c = numbers());
-                showValue(option[1]);
-                setTextQuestion((t)=> t=asking(numberRandom()));
+                controlOption(1);
             }}>B <p>{option[1]}</p></button>
             <button
                 onClick={() => {
-                    setOption(c => c = numbers());
-                    showValue(option[2]);
-                    setTextQuestion((t)=> t=asking(numberRandom()));
+                    controlOption(2);
                 }}>C <p>{option[2]}</p></button>
             <button
                 onClick={() => {
-                    setOption(c => c = numbers());
-                    showValue(option[3]);
-                    setTextQuestion((t)=> t=asking(numberRandom()));
+                    controlOption(3);
                 }}
             >D <p>{option[3]}</p></button>
         </div>
