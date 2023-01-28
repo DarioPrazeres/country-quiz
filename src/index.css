@@ -13,6 +13,30 @@ body {
   font-family: 'Poppins';
 }
 
+h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 54px;
+  text-transform: uppercase;
+  color: #F2F2F2;
+  margin-bottom: 2px;
+}
+
+.title {
+  border: solid red 1px;
+  width: 464px;
+  display: flex;
+  position: relative;
+}
+
+.iconWorld {
+  width: 162px;
+  height: 100px;
+  position: absolute;
+  right: 0px;
+}
+
 /*---------APP Style-------*/
 .body {
   border: solid red 1px;
@@ -23,8 +47,16 @@ body {
   width: 464px;
   height: 515px;
   border-radius: 24px;
+  border: solid rgb(128, 0, 83) 2px;
+  padding: 50px 10px 10px 17px;
 }
-
+.question-p{
+  color: #2f527b;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin: 17px 0px 10px 0px;
+}
 .App {
   width: 100vw;
   height: 95vh;
@@ -43,10 +75,13 @@ body {
   background: none;
   border-radius: 12px;
   display: flex;
+  align-items: center;
   color: rgba(96, 102, 208, 0.7);
   font-weight: 500;
   font-size: 18px;
   line-height: 27px;
+  margin: 15px 0px 15px 0px;
+  padding-left: 4px;
 }
 
 /*-----------Footer --------------*/

@@ -6,7 +6,7 @@ function Question() {
     const {textQuestion, setTextQuestion} = useContext(ContContext)
     return (
         <div>
-            <p>{textQuestion}</p>
+            <p className="question-p">{textQuestion}</p>
         </div>
     )
 }
