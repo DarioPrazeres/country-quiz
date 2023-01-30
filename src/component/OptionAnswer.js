@@ -1,30 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { ContContext } from "../App";
 import { asking, numberRandom } from "./Question";
 function OptionAnswer() {
-    const { option, setOption, setTextQuestion } = useContext(ContContext);
+    const { option, setOption, setTextQuestion, data } = useContext(ContContext);
+    const [questionPosition, setQuestionPosition] = useState(numbersRandom())
+    console.log(data)
+    useEffect(()=>{
+        
+    }, [questionPosition])
     function controlOption(num){
         setOption(c => c = numbers());
-        showValue(option[num]);
+        //showValue(option[num]);
         setTextQuestion((t)=> t=asking(numberRandom()));
+    }
+    function optionText(){
+        console.log(questionPosition)
+        console.log(data.length)
+        if(questionPosition+4>=data.length){
+            console.log(questionPosition)
+            console.log(data.length)
+            data && data.map((e, i) => {
+                if (i === questionPosition) {
+                    console.log(e)
+                }
+            })
+        }else{
+            console.log('ENtrei aqui')
+            console.log(questionPosition)
+            console.log(data.length)
+            data && data.map((e, i) => {
+                if (i === questionPosition) {
+                    console.log(e)
+                }
+            })
+        }
     }
     console.log(option)
     return (
         <div className="option">
             <button onClick={() => {
-                controlOption(0)
+                controlOption(0);
+                optionText();
+                setQuestionPosition(c=> c = numbersRandom());
             }}>A <p>{option[0]}</p></button>
             <button onClick={() => {
                 controlOption(1);
+                optionText();
+                setQuestionPosition(c=> c = numbersRandom());
             }}>B <p>{option[1]}</p></button>
             <button
                 onClick={() => {
                     controlOption(2);
+                    optionText();
                 }}>C <p>{option[2]}</p></button>
             <button
                 onClick={() => {
                     controlOption(3);
+                    optionText();
                 }}
             >D <p>{option[3]}</p></button>
         </div>
@@ -35,6 +68,9 @@ function showValue(value) {
 }
 function numbers() {
     return Array(4).fill().map((a, i) => a = i).sort(() => Math.random() - 0.5)
+}
+function numbersRandom(){
+    return Math.floor(Math.random()*250);
 }
 export { numbers };
 export default OptionAnswer;
