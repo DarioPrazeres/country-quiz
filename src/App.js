@@ -13,7 +13,7 @@ function App() {
   const [cont, setCont] = useState(0);
   const [option, setOption] = useState(numbers());
   const [textQuestion, setTextQuestion] = useState(asking(numberRandom()));
-  const data = useFetch('https://restcountries.com/v2/all');
+  const data = dataFile//useFetch('https://restcountries.com/v2/all');
   return (
     <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data }}>
       <section className="App">

@@ -15,21 +15,20 @@ function OptionAnswer() {
         setTextQuestion((t)=> t=asking(numberRandom()));
     }
     function optionText(){
-        console.log(questionPosition)
-        console.log(data.length)
-        if(questionPosition+4>=data.length){
-            console.log(questionPosition)
-            console.log(data.length)
-            data && data.map((e, i) => {
+        var c
+        if(questionPosition+4>=data[0].length){
+            console.log('Position', questionPosition)
+            console.log(data[0].length)            
+            data && data[0].map((e, i) => {
                 if (i === questionPosition) {
                     console.log(e)
                 }
             })
         }else{
             console.log('ENtrei aqui')
-            console.log(questionPosition)
-            console.log(data.length)
-            data && data.map((e, i) => {
+            console.log('Position', questionPosition)
+            console.log(data[0].length)
+            data && data[0].map((e, i) => {
                 if (i === questionPosition) {
                     console.log(e)
                 }
