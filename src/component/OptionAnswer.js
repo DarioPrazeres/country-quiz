@@ -3,16 +3,15 @@ import { useContext } from "react";
 import { ContContext } from "../App";
 import { asking, numberRandom } from "./Question";
 function OptionAnswer() {
-    const { option, setOption, setTextQuestion, data } = useContext(ContContext);
-    const [questionPosition, setQuestionPosition] = useState(numbersRandom())
+    const { option, setOption, setTextQuestion, data, setCont, questionPosition, setQuestionPosition } = useContext(ContContext);
+    
     console.log(data)
     useEffect(()=>{
         
     }, [questionPosition])
     function controlOption(num){
         setOption(c => c = numbers());
-        //showValue(option[num]);
-        setTextQuestion((t)=> t=asking(numberRandom()));
+        setCont((t)=> t=numberRandom());
     }
     function optionText(){
         var c
@@ -21,7 +20,7 @@ function OptionAnswer() {
             console.log(data[0].length)            
             data && data[0].map((e, i) => {
                 if (i === questionPosition) {
-                    console.log(e)
+                    console.log(e);
                 }
             })
         }else{
@@ -71,5 +70,5 @@ function numbers() {
 function numbersRandom(){
     return Math.floor(Math.random()*250);
 }
-export { numbers };
+export { numbers, numbersRandom };
 export default OptionAnswer;
