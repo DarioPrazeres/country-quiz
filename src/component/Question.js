@@ -28,19 +28,19 @@ function asking(value, countries, pos) {
     })
     switch (value) {
         case 0:
-            return `${capital} is the capital of ...`;
+            return `${capital} is the capital of ... ${pos}`;
             break;
         case 1:
-            return '{flag.url} Which countryoes this flag belong to?';
+            return `{flag.url} Which countryoes this flag belong to? ${pos}`;
             break;
         case 2:
-            return `What is ${name} s territorial extension?`;
+            return `What is ${name} s territorial extension? ${pos}`;
             break;
         case 3:
-            return `What is the population of ${name}`;
+            return `What is the population of ${name}  ${pos}`;
             break;
         default:
-            return `What continent ${name} belongs to?`;
+            return `What continent ${name} belongs to?  ${pos}`;
             break;
     }
 }
