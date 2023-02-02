@@ -3,8 +3,7 @@ import { useContext } from "react";
 import { ContContext } from "../App";
 import { asking, numberRandom } from "./Question";
 function OptionAnswer() {
-    const { option, setOption, setTextQuestion, data, setCont, questionPosition, setQuestionPosition } = useContext(ContContext);
-    console.log(data)
+    const { option, setOption, setTextQuestion, data, setCont, cont, questionPosition, setQuestionPosition } = useContext(ContContext);
     useEffect(() => {
 
     }, [questionPosition])
@@ -12,14 +11,33 @@ function OptionAnswer() {
         setOption(c => c = numbers());
         setCont((t) => t = numberRandom());
     }
-    function optionText(valuePos, topic) {
-        var dp
+    function optionText(valuePos) {
+        var optionTerritorial, optionCountryName, optionNumberPopulation, optionNameContinent;
         data && data[0].map((e, i) => {
             if (i === valuePos) {
-                dp = e.capital;
+                optionTerritorial = e.area;
+                optionCountryName = e.name;
+                optionNameContinent = e.continent || e.region;
+                optionNumberPopulation = e.population
             }
         })
-        return dp
+        switch (cont) {
+            case 0:
+                return ` ${optionCountryName}`;
+                break;
+            case 1:
+                return `${optionCountryName}`;
+                break;
+            case 2:
+                return `${optionTerritorial} Km`;
+                break;
+            case 3:
+                return `${optionNumberPopulation} People`;
+                break;
+            default:
+                return `${optionNameContinent}`;
+                break;
+        }
     }
     console.log(option)
     function updateButton(value){

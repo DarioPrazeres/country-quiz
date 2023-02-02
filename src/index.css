@@ -83,7 +83,12 @@ h1 {
   margin: 15px 0px 15px 7px;
   padding-left: 4px;
 }
-
+.imgFlag{
+  display: none;
+  width: 70px;
+  height: 40px;
+  border: solid 1px red;
+}
 /*-----------Footer --------------*/
 footer {
   margin-top: 5px;

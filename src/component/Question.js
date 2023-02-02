@@ -5,10 +5,20 @@ import { ContContext } from "../App";
 function Question() {
     const {textQuestion, setTextQuestion, questionPosition, cont, data} = useContext(ContContext);
     //console.log('DATA:', data)
+    
     return (
         <div>
+            (
+                if
+            )
+            <Display cont={cont}/>
             <p className="question-p">{asking(cont, data, questionPosition)}</p>
         </div>
+    )
+}
+function Display(props){
+    return (
+        <img className="imgFlag" src="" alt="flag" />
     )
 }
 function numberRandom(){
@@ -16,22 +26,26 @@ function numberRandom(){
 }
 
 function asking(value, countries, pos) {
-    var capital;
-    var name;
+    var capital, name, url;
+    const img = document.querySelector('img.imgFlag')
     countries && countries[0].map((e, i) => {        
         if (i === pos) {
-            //console.log('AQUI estou', pos)
-            //console.log(e);
+            console.log('O corrento', pos)
+            console.log(e);
             capital = e.capital;
             name = e.name;
+            url = e.flags.png;
         }
     })
+    if(capital=== undefined){
+        value ++;
+    }
     switch (value) {
         case 0:
             return `${capital} is the capital of ... ${pos}`;
             break;
         case 1:
-            return `{flag.url} Which countryoes this flag belong to? ${pos}`;
+            return `Which countryoes this flag belong to? ${pos}`;
             break;
         case 2:
             return `What is ${name} s territorial extension? ${pos}`;
