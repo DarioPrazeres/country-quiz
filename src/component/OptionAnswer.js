@@ -4,7 +4,8 @@ import { ContContext } from "../App";
 import { asking, numberRandom } from "./Question";
 function OptionAnswer() {
     const { option, setOption, setTextQuestion, data, setCont, questionPosition, setQuestionPosition } = useContext(ContContext);
-    
+    const [text3, setText3] = useState(showOption(data, option[3], questionPosition))
+    console.log(text3)
     console.log(data)
     useEffect(()=>{
         
@@ -16,20 +17,20 @@ function OptionAnswer() {
     function optionText(){
         var c
         if(questionPosition+4>=data[0].length){
-            console.log('Position', questionPosition)
-            console.log(data[0].length)            
+            /*console.log('Position', questionPosition)
+            console.log(data[0].length) */           
             data && data[0].map((e, i) => {
                 if (i === questionPosition) {
-                    console.log(e);
+                    console.log(i);
                 }
             })
         }else{
-            console.log('ENtrei aqui')
+            /*console.log('ENtrei aqui')
             console.log('Position', questionPosition)
-            console.log(data[0].length)
+            console.log(data[0].length)*/
             data && data[0].map((e, i) => {
                 if (i === questionPosition) {
-                    console.log(e)
+                    console.log(i)
                 }
             })
         }
@@ -57,12 +58,32 @@ function OptionAnswer() {
                     controlOption(3);
                     optionText();
                 }}
-            >D <p>{option[3]}</p></button>
+            >D <p> {text3}</p></button>
         </div>
     )
 }
-function showValue(value) {
-    console.log(value);
+function showOption(array, pos, currentPosition){
+    console.log('entrei')
+    if(currentPosition+4>=array[0].length){
+        console.log('Position', currentPosition)
+        console.log(array[0].length)            
+        array && array[0].map((e, i) => {
+            if (i === (currentPosition-pos)) {
+                console.log(e);
+                return `Entrei maior`;
+            }
+        })
+    }else{
+        console.log('ENtrei aqui')
+        console.log('Position', currentPosition)
+        console.log(array[0].length)
+        array && array[0].map((e, i) => {
+            if (i === (currentPosition+pos)) {
+                console.log(e)
+                return `Entrei menor`;
+            }
+        })
+    }
 }
 function numbers() {
     return Array(4).fill().map((a, i) => a = i).sort(() => Math.random() - 0.5)

@@ -4,7 +4,7 @@ import { ContContext } from "../App";
 
 function Question() {
     const {textQuestion, setTextQuestion, questionPosition, cont, data} = useContext(ContContext);
-    console.log('DATA:', data)
+    //console.log('DATA:', data)
     return (
         <div>
             <p className="question-p">{asking(cont, data, questionPosition)}</p>
@@ -20,8 +20,8 @@ function asking(value, countries, pos) {
     var name;
     countries && countries[0].map((e, i) => {        
         if (i === pos) {
-            console.log('AQUI estou')
-            console.log(e);
+            //console.log('AQUI estou', pos)
+            //console.log(e);
             capital = e.capital;
             name = e.name;
         }
