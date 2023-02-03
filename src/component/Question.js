@@ -8,9 +8,9 @@ function Question() {
     
     return (
         <div>
-            (
-                if
-            )
+            {
+                if(cont==1){}
+            }
             <Display cont={cont}/>
             <p className="question-p">{asking(cont, data, questionPosition)}</p>
         </div>
