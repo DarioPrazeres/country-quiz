@@ -83,10 +83,18 @@ h1 {
   margin: 15px 0px 15px 7px;
   padding-left: 4px;
 }
-.imgFlag{
+.hide{
   display: none;
-  width: 70px;
-  height: 40px;
+}
+.show{
+  display: block;
+}
+.dp{
+  border: solid 1px red;
+}
+.imgFlag{
+  width: 84px;
+  height: 54px;
   border: solid 1px red;
 }
 /*-----------Footer --------------*/

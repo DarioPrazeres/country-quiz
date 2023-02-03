@@ -8,29 +8,22 @@ function Question() {
     
     return (
         <div>
-            {
-                if(cont==1){}
-            }
-            <Display cont={cont}/>
-            <p className="question-p">{asking(cont, data, questionPosition)}</p>
+            <Asking countries={data} value={cont} pos={questionPosition} />
         </div>
-    )
-}
-function Display(props){
-    return (
-        <img className="imgFlag" src="" alt="flag" />
     )
 }
 function numberRandom(){
   return Math.floor(Math.random()*5);
 }
 
-function asking(value, countries, pos) {
+function Asking(props) {
     var capital, name, url;
-    const img = document.querySelector('img.imgFlag')
+    var pos = props.pos;
+    var countries = props.countries;
+    var value = props.value;
     countries && countries[0].map((e, i) => {        
         if (i === pos) {
-            console.log('O corrento', pos)
+            console.log('O corrento', props.pos)
             console.log(e);
             capital = e.capital;
             name = e.name;
@@ -40,21 +33,27 @@ function asking(value, countries, pos) {
     if(capital=== undefined){
         value ++;
     }
+    value = 1;
     switch (value) {
         case 0:
-            return `${capital} is the capital of ... ${pos}`;
+            return <p className="question-p"> {capital} is the capital of ... ${pos}</p>;
             break;
         case 1:
-            return `Which countryoes this flag belong to? ${pos}`;
+            return (
+                <div className="dp">
+                    <img className="imgFlag" src={url} alt="flag" />
+                    <p className="question-p"> Which countries this flag belong to? {pos}</p>
+                </div>
+            )
             break;
         case 2:
-            return `What is ${name} s territorial extension? ${pos}`;
+            return <p className="question-p"> What is {name}'s territorial extension? ${pos}</p>;
             break;
         case 3:
-            return `What is the population of ${name}  ${pos}`;
+            return <p className="question-p"> What is the population of ${name}  ${pos}</p>;
             break;
         default:
-            return `What continent ${name} belongs to?  ${pos}`;
+            return <p className="question-p"> What continent {name} belongs to?  ${pos} </p>;
             break;
     }
 }
@@ -66,5 +65,5 @@ What is {country.name}'s territorial extension?
 What is the population of {country.name}?
 What continent {country.name} belongs to?
 */
-export {asking, numberRandom}
+export {numberRandom}
 export default Question;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { ContContext } from "../App";
-import { asking, numberRandom } from "./Question";
+import { numberRandom } from "./Question";
 function OptionAnswer() {
     const { option, setOption, setTextQuestion, data, setCont, cont, questionPosition, setQuestionPosition } = useContext(ContContext);
     useEffect(() => {
@@ -26,21 +26,21 @@ function OptionAnswer() {
                 return ` ${optionCountryName}`;
                 break;
             case 1:
-                return `${optionCountryName}`;
+                return ` ${optionCountryName}`;
                 break;
             case 2:
-                return `${optionTerritorial} Km`;
+                return ` ${optionTerritorial} Km`;
                 break;
             case 3:
-                return `${optionNumberPopulation} People`;
+                return ` ${optionNumberPopulation} People`;
                 break;
             default:
-                return `${optionNameContinent}`;
+                return ` ${optionNameContinent}`;
                 break;
         }
     }
     console.log(option)
-    function updateButton(value){
+    function updateButton(value) {
         controlOption(value);
         setQuestionPosition(c => c = numbersRandom());
     }
@@ -48,19 +48,19 @@ function OptionAnswer() {
         <div className="option">
             <button onClick={() => {
                 updateButton(0)
-            }}>A {showOption(data, option[0], questionPosition)} <p>{optionText(showOption(data, option[0], questionPosition))}</p></button>
+            }}>A {showOption(data, option[0], questionPosition)} <p> {optionText(showOption(data, option[0], questionPosition))}</p></button>
             <button onClick={() => {
                 updateButton(1)
-            }}>B {showOption(data, option[1], questionPosition)} <p>{optionText(showOption(data, option[1], questionPosition))}</p></button>
+            }}>B {showOption(data, option[1], questionPosition)} <p> {optionText(showOption(data, option[1], questionPosition))}</p></button>
             <button
                 onClick={() => {
                     updateButton(2)
-                }}>C {showOption(data, option[2], questionPosition)} <p>{optionText(showOption(data, option[2], questionPosition))}</p></button>
+                }}>C {showOption(data, option[2], questionPosition)} <p> {optionText(showOption(data, option[2], questionPosition))}</p></button>
             <button
                 onClick={() => {
                     updateButton(3)
                 }}
-            >D <p>{showOption(data, option[3], questionPosition)} {optionText(showOption(data, option[3], questionPosition))}</p></button>
+            >D {showOption(data, option[3], questionPosition)} <p> {optionText(showOption(data, option[3], questionPosition))}</p></button>
         </div>
     )
 }
