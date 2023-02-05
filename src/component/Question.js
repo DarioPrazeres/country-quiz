@@ -33,7 +33,6 @@ function Asking(props) {
     if(capital=== undefined){
         value ++;
     }
-    value = 1;
     switch (value) {
         case 0:
             return <p className="question-p"> {capital} is the capital of ... ${pos}</p>;
