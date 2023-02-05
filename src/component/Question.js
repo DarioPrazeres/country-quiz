@@ -56,13 +56,5 @@ function Asking(props) {
             break;
     }
 }
-/*
-Idea of questions!
-{data.capital} is the capital of ...
-{flag.url} Which countryoes this flag belong to?
-What is {country.name}'s territorial extension?
-What is the population of {country.name}?
-What continent {country.name} belongs to?
-*/
 export {numberRandom}
 export default Question;
