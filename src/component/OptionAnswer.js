@@ -19,6 +19,9 @@ function OptionAnswer() {
                 optionCountryName = e.name;
                 optionNameContinent = e.continent || e.region;
                 optionNumberPopulation = e.population
+                if(optionTerritorial=== undefined){
+                    
+                }
             }
         })
         switch (cont) {
@@ -48,17 +51,21 @@ function OptionAnswer() {
         <div className="option">
             <button onClick={() => {
                 updateButton(0)
+                corectAnswer(option[0], questionPosition)
             }}>A {showOption(data, option[0], questionPosition)} <p> {optionText(showOption(data, option[0], questionPosition))}</p></button>
             <button onClick={() => {
                 updateButton(1)
+                corectAnswer(option[1], questionPosition)
             }}>B {showOption(data, option[1], questionPosition)} <p> {optionText(showOption(data, option[1], questionPosition))}</p></button>
             <button
                 onClick={() => {
                     updateButton(2)
+                    corectAnswer(option[2], questionPosition)
                 }}>C {showOption(data, option[2], questionPosition)} <p> {optionText(showOption(data, option[2], questionPosition))}</p></button>
             <button
                 onClick={() => {
                     updateButton(3)
+                    corectAnswer(option[3], questionPosition)
                 }}
             >D {showOption(data, option[3], questionPosition)} <p> {optionText(showOption(data, option[3], questionPosition))}</p></button>
         </div>
@@ -78,6 +85,11 @@ function numbers() {
 }
 function numbersRandom() {
     return Math.floor(Math.random() * 250);
+}
+function corectAnswer(position, corectPosition){
+    if(position === corectPosition){
+        console.log('WINNER!!')
+    }
 }
 export { numbers, numbersRandom };
 export default OptionAnswer;

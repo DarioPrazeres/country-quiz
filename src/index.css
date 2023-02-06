@@ -83,6 +83,9 @@ h1 {
   margin: 15px 0px 15px 7px;
   padding-left: 4px;
 }
+.option button:hover{
+  background: #f9ab26;
+}
 .hide{
   display: none;
 }
