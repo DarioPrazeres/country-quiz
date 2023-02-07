@@ -24,7 +24,6 @@ h1 {
 }
 
 .title {
-  border: solid red 1px;
   width: 464px;
   display: flex;
   position: relative;
@@ -38,16 +37,12 @@ h1 {
 }
 
 /*---------APP Style-------*/
-.body {
-  border: solid red 1px;
-}
 
 .questionSection {
   background: white;
   width: 464px;
   height: 515px;
   border-radius: 24px;
-  border: solid rgb(128, 0, 83) 2px;
   padding: 50px 10px 10px 17px;
 }
 .question-p{
@@ -60,7 +55,6 @@ h1 {
 .App {
   width: 100vw;
   height: 95vh;
-  border: solid 1px black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,28 +62,50 @@ h1 {
 }
 
 /*-----------Option Style ------------*/
+.option{
+  position: relative;
+}
 .correct{
   background: #60bf80;
+  color: #fff;
 }
 .incorrect{
   background: #ea8282;
+  color: #fff;
 }
 .neutro{
   background: #fff;
+  color: rgba(96, 102, 208, 0.7);
 }
-.option button {
+.option-0,
+.option-1,
+.option-2,
+.option-3
+ {
   width: 400px;
   height: 56px;
   border: 2px solid rgba(96, 102, 208, 0.7);
   border-radius: 12px;
   display: flex;
   align-items: center;
-  color: rgba(96, 102, 208, 0.7);
+
   font-weight: 500;
   font-size: 18px;
   line-height: 27px;
   margin: 15px 0px 15px 7px;
   padding-left: 4px;
+}
+.nextQuestion{
+  width: 116px;
+  height: 56px;
+  background-color: #f9ab26;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 18px;
+  position: absolute;
+  right: 10px;
+  margin-top: 10px;
 }
 .option .butto:hover{
   background: #f9ab26;

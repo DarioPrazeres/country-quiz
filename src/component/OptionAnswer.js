@@ -64,19 +64,20 @@ function OptionAnswer() {
             <button id="option-0" className="option-0 neutro" onClick={() => {        
                 updateButton(0, 'option-0')
             }}>A {showOption(data, option[0], questionPosition)} <p> {optionText(showOption(data, option[0], questionPosition))}</p></button>
-            <button id='option-1' className="neutro" onClick={() => {
+            <button id='option-1' className="option-1 neutro" onClick={() => {
                 updateButton(1, 'option-1')
             }}>B {showOption(data, option[1], questionPosition)} <p> {optionText(showOption(data, option[1], questionPosition))}</p></button>
-            <button className="option-2 neutro"
+            <button id='option-2' className="option-2 neutro"
                 onClick={() => { 
                   updateButton(2, 'option-2')
                     
                 }}>C {showOption(data, option[2], questionPosition)} <p> {optionText(showOption(data, option[2], questionPosition))}</p></button>
-            <button className="option-3 neutro"
+            <button id='option-3' className="option-3 neutro"
                 onClick={() => {
                     updateButton(3, 'option-3')                    
                 }}
             >D {showOption(data, option[3], questionPosition)} <p> {optionText(showOption(data, option[3], questionPosition))}</p></button>
+            <button className="nextQuestion">Next</button>
         </div>
     )
 }
