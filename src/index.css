@@ -68,11 +68,19 @@ h1 {
 }
 
 /*-----------Option Style ------------*/
+.correct{
+  background: #60bf80;
+}
+.incorrect{
+  background: #ea8282;
+}
+.neutro{
+  background: #fff;
+}
 .option button {
   width: 400px;
   height: 56px;
   border: 2px solid rgba(96, 102, 208, 0.7);
-  background: none;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -83,7 +91,7 @@ h1 {
   margin: 15px 0px 15px 7px;
   padding-left: 4px;
 }
-.option button:hover{
+.option .butto:hover{
   background: #f9ab26;
 }
 .hide{
@@ -100,6 +108,7 @@ h1 {
   height: 54px;
   border: solid 1px red;
 }
+
 /*-----------Footer --------------*/
 footer {
   margin-top: 5px;

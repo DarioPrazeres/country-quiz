@@ -23,8 +23,8 @@ function Asking(props) {
     var value = props.value;
     countries && countries[0].map((e, i) => {        
         if (i === pos) {
-            console.log('O corrento', props.pos)
-            console.log(e);
+            //console.log('O corrento', props.pos)
+            //console.log(e);
             capital = e.capital;
             name = e.name;
             url = e.flags.png;
