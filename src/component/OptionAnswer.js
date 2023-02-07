@@ -46,6 +46,7 @@ function OptionAnswer() {
     }
     //console.log(option)
     function updateButton(value, id) {
+        document.getElementById('next').style.display = 'block'
         switch (corectAnswer(showOption(data, option[value], questionPosition), questionPosition)) {
             case true:
                 document.getElementById(`${id}`).classList.add("correct");
