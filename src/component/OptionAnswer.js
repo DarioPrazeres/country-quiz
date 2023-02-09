@@ -69,6 +69,7 @@ function OptionAnswer() {
             document.getElementById('option-3').classList.remove("correct");
             controlOption(value);
             setQuestionPosition(c => c = numbersRandom()); 
+            document.getElementById('next').style.display = 'none';
         })
         
     }
