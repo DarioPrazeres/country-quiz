@@ -129,6 +129,9 @@ h1 {
 #next{
   display: none;
 }
+.correct-1{
+  background: red;
+}
 /*-----------Footer --------------*/
 footer {
   margin-top: 5px;

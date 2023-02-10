@@ -12,7 +12,7 @@ function OptionAnswer() {
         setOption(c => c = numbers());
         setCont((t) => t = numberRandom());
     }
-    
+
     function optionText(valuePos) {
         var optionTerritorial, optionCountryName, optionNumberPopulation, optionNameContinent;
         data && data[0].map((e, i) => {
@@ -21,8 +21,8 @@ function OptionAnswer() {
                 optionCountryName = e.name;
                 optionNameContinent = e.continent || e.region;
                 optionNumberPopulation = e.population
-                if(optionTerritorial=== undefined){
-                    
+                if (optionTerritorial === undefined) {
+
                 }
             }
         })
@@ -52,44 +52,71 @@ function OptionAnswer() {
                 document.getElementById(`${id}`).classList.add("correct");
                 document.getElementById(`${id}`).classList.remove("neutro");
                 break;
-        
+
             case false:
                 document.getElementById(`${id}`).classList.add("incorrect");
                 document.getElementById(`${id}`).classList.remove("neutro");
+                showCorrect();
                 break;
         }
-        document.getElementById('next').addEventListener('click', ()=>{
-            document.getElementById('option-0').classList.remove("incorrect");
-            document.getElementById('option-1').classList.remove("incorrect");
-            document.getElementById('option-2').classList.remove("incorrect");
-            document.getElementById('option-3').classList.remove("incorrect");
-            document.getElementById('option-0').classList.remove("correct");
-            document.getElementById('option-1').classList.remove("correct");
-            document.getElementById('option-2').classList.remove("correct");
-            document.getElementById('option-3').classList.remove("correct");
+        document.getElementById('next').addEventListener('click', () => {
+            for (var i = 0; i < 4; i++) {
+                document.getElementById(`option-${i}`).classList.remove("incorrect");
+                document.getElementById(`option-${i}`).classList.remove("correct");
+                document.getElementById(`option-${i}`).classList.add("neutro");
+            }
             controlOption(value);
-            setQuestionPosition(c => c = numbersRandom()); 
+            setQuestionPosition(c => c = numbersRandom());
             document.getElementById('next').style.display = 'none';
         })
         
     }
+    function showCorrect() {
+        for (var i = 0; i < 4; i++) {
+            console.log(i)
+            data && data[0].map((e, index) => {
+                if (index === questionPosition) {
+                    const optionCorrect = document.getElementById(`option-${i}`);
+                    console.log(e.name)
+                    console.log(optionCorrect.outerText)
+                    if (e.name === optionCorrect.outerText) {
+                        optionCorrect.classList.remove("neutro");
+                        optionCorrect.classList.add("correct");
+                        console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
+                    }else if(cont===4){
+                        if (e.continent||e.region === optionCorrect.outerText) {
+                            optionCorrect.classList.remove("neutro");
+                            optionCorrect.classList.add("correct");
+                            console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
+                        }
+                    }else if(cont===2){
+                        if (e.area === optionCorrect.outerText) {
+                            optionCorrect.classList.remove("neutro");
+                            optionCorrect.classList.add("correct");
+                            console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
+                        }
+                    }
+                }
+            })
+        }
+    }
     return (
         <div className="option">
-            <button id="option-0" className="option-0 neutro" onClick={() => {        
+            <button id="option-0" className="option-0 neutro" onClick={() => {
                 updateButton(0, 'option-0')
-            }}>A {showOption(data, option[0], questionPosition)} <p> {optionText(showOption(data, option[0], questionPosition))}</p></button>
+            }}><p id="p-0">{optionText(showOption(data, option[0], questionPosition))}</p></button>
             <button id='option-1' className="option-1 neutro" onClick={() => {
                 updateButton(1, 'option-1')
-            }}>B {showOption(data, option[1], questionPosition)} <p> {optionText(showOption(data, option[1], questionPosition))}</p></button>
+            }}><p id="p-1">{optionText(showOption(data, option[1], questionPosition))}</p></button>
             <button id='option-2' className="option-2 neutro"
-                onClick={() => { 
-                  updateButton(2, 'option-2')                    
-                }}>C {showOption(data, option[2], questionPosition)} <p> {optionText(showOption(data, option[2], questionPosition))}</p></button>
+                onClick={() => {
+                    updateButton(2, 'option-2')
+                }}><p id="p-2">{optionText(showOption(data, option[2], questionPosition))}</p></button>
             <button id='option-3' className="option-3 neutro"
                 onClick={() => {
-                    updateButton(3, 'option-3')                    
+                    updateButton(3, 'option-3')
                 }}
-            >D {showOption(data, option[3], questionPosition)} <p> {optionText(showOption(data, option[3], questionPosition))}</p></button>
+            ><p id="p-3">{optionText(showOption(data, option[3], questionPosition))}</p></button>
             <button id="next" className="nextQuestion">Next</button>
         </div>
     )
@@ -109,14 +136,14 @@ function numbers() {
 function numbersRandom() {
     return Math.floor(Math.random() * 250);
 }
-function corectAnswer(position, corectPosition){
+function corectAnswer(position, corectPosition) {
     console.log("CORRECT POSITION", corectPosition)
     console.log("Other POSITION", position)
-    if(position == corectPosition){
+    if (position == corectPosition) {
         //alert('WINNER')
         console.log('WINNER!!');
         return true;
-    }else{
+    } else {
         //alert('LOSER')
         console.log('LOSER!!')
         return false;
@@ -124,3 +151,23 @@ function corectAnswer(position, corectPosition){
 }
 export { numbers, numbersRandom };
 export default OptionAnswer;
+/*
+        <div className="option">
+            <button id="option-0" className="option-0 neutro" onClick={() => {        
+                updateButton(0, 'option-0')
+            }}>A {showOption(data, option[0], questionPosition)} <p> {optionText(showOption(data, option[0], questionPosition))}</p></button>
+            <button id='option-1' className="option-1 neutro" onClick={() => {
+                updateButton(1, 'option-1')
+            }}>B {showOption(data, option[1], questionPosition)} <p> {optionText(showOption(data, option[1], questionPosition))}</p></button>
+            <button id='option-2' className="option-2 neutro"
+                onClick={() => { 
+                  updateButton(2, 'option-2')                    
+                }}>C {showOption(data, option[2], questionPosition)} <p> {optionText(showOption(data, option[2], questionPosition))}</p></button>
+            <button id='option-3' className="option-3 neutro"
+                onClick={() => {
+                    updateButton(3, 'option-3')                    
+                }}
+            >{showOption(data, option[3], questionPosition)} <p> {optionText(showOption(data, option[3], questionPosition))}</p></button>
+            <button id="next" className="nextQuestion">Next</button>
+        </div>
+*/
