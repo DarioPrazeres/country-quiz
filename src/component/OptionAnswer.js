@@ -4,7 +4,8 @@ import { ContContext } from "../App";
 import { numberRandom } from "./Question";
 function OptionAnswer() {
     const optionA = document.querySelector('button.option-0')
-    const { option, setOption, setTextQuestion, data, setCont, cont, questionPosition, setQuestionPosition } = useContext(ContContext);
+    const { option, setOption, setTextQuestion, data, setCont, cont, questionPosition, setQuestionPosition, optionVerify, setOptionVerify } = useContext(ContContext);
+    
     useEffect(() => {
         console.log("POSITION", questionPosition)
     }, [questionPosition])
@@ -34,10 +35,10 @@ function OptionAnswer() {
                 return ` ${optionCountryName}`;
                 break;
             case 2:
-                return ` ${optionTerritorial} Km`;
+                return ` ${optionTerritorial}`;
                 break;
             case 3:
-                return ` ${optionNumberPopulation} People`;
+                return ` ${optionNumberPopulation}`;
                 break;
             default:
                 return ` ${optionNameContinent}`;
@@ -46,6 +47,7 @@ function OptionAnswer() {
     }
     //console.log(option)
     function updateButton(value, id) {
+        console.log("MODE", cont)
         document.getElementById('next').style.display = 'block'
         switch (corectAnswer(showOption(data, option[value], questionPosition), questionPosition)) {
             case true:
@@ -84,13 +86,24 @@ function OptionAnswer() {
                         optionCorrect.classList.add("correct");
                         console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
                     }else if(cont===4){
+                        console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
                         if (e.continent||e.region === optionCorrect.outerText) {
                             optionCorrect.classList.remove("neutro");
                             optionCorrect.classList.add("correct");
                             console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
                         }
                     }else if(cont===2){
-                        if (e.area === optionCorrect.outerText) {
+                        console.log("AQUI!! AREA", e.area)
+                        console.log("AQUI!! AREA", optionCorrect.outerText)
+                        if (e.area === Number(optionCorrect.outerText)) {
+                            optionCorrect.classList.remove("neutro");
+                            optionCorrect.classList.add("correct");
+                            console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
+                        }
+                    }else if(cont===3){
+                        console.log("AQUI!! Population", e.population)
+                        console.log("AQUI!! Population", optionCorrect.outerText)
+                        if (e.population === Number(optionCorrect.outerText)) {
                             optionCorrect.classList.remove("neutro");
                             optionCorrect.classList.add("correct");
                             console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
@@ -114,7 +127,8 @@ function OptionAnswer() {
                 }}><p id="p-2">{optionText(showOption(data, option[2], questionPosition))}</p></button>
             <button id='option-3' className="option-3 neutro"
                 onClick={() => {
-                    updateButton(3, 'option-3')
+                    console.log('CACTH',showOption(data, option[3], questionPosition));
+                    updateButton(3, 'option-3');
                 }}
             ><p id="p-3">{optionText(showOption(data, option[3], questionPosition))}</p></button>
             <button id="next" className="nextQuestion">Next</button>

@@ -13,13 +13,14 @@ const ContContext = createContext();
 function App() {
   const [cont, setCont] = useState(0);
   const [option, setOption] = useState(numbers());
+  const [optionVerify, setOptionVerify] = useState([]);
   const [textQuestion, setTextQuestion] = useState();
   const [questionPosition, setQuestionPosition] = useState(numbersRandom())
   const [country, setCountry] = useState()
   const data = dataFile//useFetch('https://restcountries.com/v2/all');
   console.log(data[0])
   return (
-    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition}}>
+    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition, optionVerify, setOptionVerify}}>
       <section className="App">
         <div className='title'>
           <h1>Country Quiz</h1>
