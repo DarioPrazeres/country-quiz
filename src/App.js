@@ -7,6 +7,7 @@ import { numbers, } from './component/OptionAnswer';
 import { numberRandom } from './component/Question';
 import { numbersRandom } from './component/OptionAnswer';
 import worldIcon from "./img/world.svg";
+import cupIcon from "./img/cup.svg"
 import dataFile from "../data.json"
 const ContContext = createContext();
 
@@ -31,10 +32,21 @@ function App() {
         <div id='nextQuestion' className='questionSection'>
           <Question />
           <OptionAnswer />
+          <Result point={point}/>
         </div>
       </section>
     </ContContext.Provider>
   );
+}
+function Result(props){
+  return(
+    <div className='result'>
+      <img src={cupIcon} />
+      <h1>Results</h1>
+      <p>You got <span>{props.point}</span> correct answers</p>
+      <button>Try again</button>
+    </div>
+  )
 }
 export { ContContext }
 

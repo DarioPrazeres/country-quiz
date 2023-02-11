@@ -7,7 +7,7 @@ function OptionAnswer() {
     
     useEffect(() => {
         console.log("POSITION", questionPosition)
-    }, [questionPosition])
+    }, [questionPosition, point])
     function controlOption(num) {
         setOption(c => c = numbers());
         setCont((t) => t = numberRandom());
@@ -47,8 +47,11 @@ function OptionAnswer() {
         setPlayed((c)=> c+1);
         console.log("JOGADA", played);
         console.log("MODE", cont)
+        console.log("POINT",point);
         if(played ===5){
             alert("JOGADAS ESGOTADAS");
+            setPoint((c)=>c=0);
+            setPlayed((c)=>c=0);
         }        
         document.getElementById('nextQuestion').style.height = '550px';
         document.getElementById('next').style.display = 'block'
