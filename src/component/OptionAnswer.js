@@ -136,7 +136,7 @@ function OptionAnswer() {
     )
 }
 function showOption(array, pos, currentPosition) {
-    if (currentPosition + 4 >= array[0].length) {
+    if (currentPosition + 4 >= 250) {
         console.log('Position Maior', currentPosition)
         return currentPosition - pos;
     } else {
@@ -164,24 +164,4 @@ function corectAnswer(position, corectPosition) {
     }
 }
 export { numbers, numbersRandom };
-export default OptionAnswer;
-/*
-        <div className="option">
-            <button id="option-0" className="option-0 neutro" onClick={() => {        
-                updateButton(0, 'option-0')
-            }}>A {showOption(data, option[0], questionPosition)} <p> {optionText(showOption(data, option[0], questionPosition))}</p></button>
-            <button id='option-1' className="option-1 neutro" onClick={() => {
-                updateButton(1, 'option-1')
-            }}>B {showOption(data, option[1], questionPosition)} <p> {optionText(showOption(data, option[1], questionPosition))}</p></button>
-            <button id='option-2' className="option-2 neutro"
-                onClick={() => { 
-                  updateButton(2, 'option-2')                    
-                }}>C {showOption(data, option[2], questionPosition)} <p> {optionText(showOption(data, option[2], questionPosition))}</p></button>
-            <button id='option-3' className="option-3 neutro"
-                onClick={() => {
-                    updateButton(3, 'option-3')                    
-                }}
-            >{showOption(data, option[3], questionPosition)} <p> {optionText(showOption(data, option[3], questionPosition))}</p></button>
-            <button id="next" className="nextQuestion">Next</button>
-        </div>
-*/
+export default OptionAnswer; 
