@@ -40,7 +40,7 @@ function App() {
 }
 function Result(props){
   return(
-    <div className='result'>
+    <div id='result' className='result'>
       <img src={cupIcon} />
       <h1>Results</h1>
       <p>You got <span>{props.point}</span> correct answers</p>
