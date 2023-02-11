@@ -41,7 +41,7 @@ h1 {
 .questionSection {
   background: white;
   width: 464px;
-  height: 550px;
+  height: 500px;
   border-radius: 24px;
   padding: 50px 10px 10px 17px;
 }
@@ -64,9 +64,9 @@ h1 {
 /*-----------Option Style ------------*/
 .option{
   position: relative;
-  border: solid 1px green;
-  height: 80%;
   width: 95%;
+  height: 70%;
+  background-color: black 1px solid;
 }
 .correct{
   background: #60bf80;

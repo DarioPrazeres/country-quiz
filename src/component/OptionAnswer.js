@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { ContContext } from "../App";
 import { numberRandom } from "./Question";
 function OptionAnswer() {
-    const optionA = document.querySelector('button.option-0')
-    const { option, setOption, setTextQuestion, data, setCont, cont, questionPosition, setQuestionPosition, optionVerify, setOptionVerify } = useContext(ContContext);
+    const { option, setOption,point, setPoint, data, setCont, cont, questionPosition, setQuestionPosition, played, setPlayed} = useContext(ContContext);
     
     useEffect(() => {
         console.log("POSITION", questionPosition)
@@ -13,7 +12,6 @@ function OptionAnswer() {
         setOption(c => c = numbers());
         setCont((t) => t = numberRandom());
     }
-
     function optionText(valuePos) {
         var optionTerritorial, optionCountryName, optionNumberPopulation, optionNameContinent;
         data && data.map((e, i) => {
@@ -45,14 +43,22 @@ function OptionAnswer() {
                 break;
         }
     }
-    //console.log(option)
     function updateButton(value, id) {
+        setPlayed((c)=> c+1);
+        console.log("JOGADA", played);
         console.log("MODE", cont)
+        if(played ===5){
+            alert("JOGADAS ESGOTADAS");
+        }        
+        document.getElementById('nextQuestion').style.height = '550px';
         document.getElementById('next').style.display = 'block'
         switch (corectAnswer(showOption(data, option[value], questionPosition), questionPosition)) {
             case true:
                 document.getElementById(`${id}`).classList.add("correct");
                 document.getElementById(`${id}`).classList.remove("neutro");
+                console.log("ACERTEI ANTES",point);
+                setPoint((c)=> c + 1);
+                console.log("ACERTEI DEPOIS",point);
                 break;
 
             case false:
@@ -70,43 +76,32 @@ function OptionAnswer() {
             controlOption(value);
             setQuestionPosition(c => c = numbersRandom());
             document.getElementById('next').style.display = 'none';
+            document.getElementById('nextQuestion').style.height = '500px';
         })
         
     }
     function showCorrect() {
         for (var i = 0; i < 4; i++) {
-            console.log(i)
             data && data.map((e, index) => {
                 if (index === questionPosition) {
                     const optionCorrect = document.getElementById(`option-${i}`);
-                    console.log(e.name)
-                    console.log(optionCorrect.outerText)
                     if (e.name === optionCorrect.outerText) {
                         optionCorrect.classList.remove("neutro");
                         optionCorrect.classList.add("correct");
-                        console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
                     }else if(cont===4){
-                        console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
                         if (e.continent||e.region === optionCorrect.outerText) {
                             optionCorrect.classList.remove("neutro");
                             optionCorrect.classList.add("correct");
-                            console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
                         }
                     }else if(cont===2){
-                        console.log("AQUI!! AREA", e.area)
-                        console.log("AQUI!! AREA", optionCorrect.outerText)
                         if (e.area === Number(optionCorrect.outerText)) {
                             optionCorrect.classList.remove("neutro");
                             optionCorrect.classList.add("correct");
-                            console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
                         }
                     }else if(cont===3){
-                        console.log("AQUI!! Population", e.population)
-                        console.log("AQUI!! Population", optionCorrect.outerText)
                         if (e.population === Number(optionCorrect.outerText)) {
                             optionCorrect.classList.remove("neutro");
                             optionCorrect.classList.add("correct");
-                            console.log("AQUI!! ENTREIIIIIIIIIIIIIIIII!")
                         }
                     }
                 }
@@ -127,7 +122,6 @@ function OptionAnswer() {
                 }}><p id="p-2">{optionText(showOption(data, option[2], questionPosition))}</p></button>
             <button id='option-3' className="option-3 neutro"
                 onClick={() => {
-                    console.log('CACTH',showOption(data, option[3], questionPosition));
                     updateButton(3, 'option-3');
                 }}
             ><p id="p-3">{optionText(showOption(data, option[3], questionPosition))}</p></button>
@@ -137,10 +131,8 @@ function OptionAnswer() {
 }
 function showOption(array, pos, currentPosition) {
     if (currentPosition + 4 >= 250) {
-        console.log('Position Maior', currentPosition)
         return currentPosition - pos;
     } else {
-        console.log('Position Menor', currentPosition)
         return currentPosition + pos;
     }
 }
@@ -151,15 +143,9 @@ function numbersRandom() {
     return Math.floor(Math.random() * 250);
 }
 function corectAnswer(position, corectPosition) {
-    console.log("CORRECT POSITION", corectPosition)
-    console.log("Other POSITION", position)
-    if (position == corectPosition) {
-        //alert('WINNER')
-        console.log('WINNER!!');
+    if (position === corectPosition) {
         return true;
     } else {
-        //alert('LOSER')
-        console.log('LOSER!!')
         return false;
     }
 }

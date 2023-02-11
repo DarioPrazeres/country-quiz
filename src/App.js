@@ -12,21 +12,23 @@ const ContContext = createContext();
 
 function App() {
   const [cont, setCont] = useState(0);
+  const [played, setPlayed] = useState(1);
+  const [point, setPoint] = useState(0);
   const [option, setOption] = useState(numbers());
   const [optionVerify, setOptionVerify] = useState([]);
   const [textQuestion, setTextQuestion] = useState();
   const [questionPosition, setQuestionPosition] = useState(numbersRandom())
   const [country, setCountry] = useState()
   const [data] = useFetch('https://restcountries.com/v2/all');
-  console.table(data)
+  console.log(data)
   return (
-    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition, optionVerify, setOptionVerify}}>
+    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition, optionVerify, setOptionVerify, point, setPoint, played, setPlayed}}>
       <section className="App">
         <div className='title'>
           <h1>Country Quiz</h1>
           <img src={worldIcon} alt='world picture' className='iconWorld'/>  
         </div>
-        <div className='questionSection'>
+        <div id='nextQuestion' className='questionSection'>
           <Question />
           <OptionAnswer />
         </div>

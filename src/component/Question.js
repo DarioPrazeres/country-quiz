@@ -3,8 +3,7 @@ import { useContext } from "react";
 import { ContContext } from "../App";
 
 function Question() {
-    const {textQuestion, setTextQuestion, questionPosition, cont, data} = useContext(ContContext);
-    //console.log('DATA:', data)
+    const {questionPosition, cont, data} = useContext(ContContext);
     
     return (
         <div>
@@ -23,8 +22,6 @@ function Asking(props) {
     var value = props.value;
     countries && countries.map((e, i) => {        
         if (i === pos) {
-            //console.log('O corrento', props.pos)
-            //console.log(e);
             capital = e.capital;
             name = e.name;
             url = e.flags.png;
