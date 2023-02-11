@@ -16,7 +16,7 @@ function OptionAnswer() {
 
     function optionText(valuePos) {
         var optionTerritorial, optionCountryName, optionNumberPopulation, optionNameContinent;
-        data && data[0].map((e, i) => {
+        data && data.map((e, i) => {
             if (i === valuePos) {
                 optionTerritorial = e.area;
                 optionCountryName = e.name;
@@ -35,7 +35,7 @@ function OptionAnswer() {
                 return ` ${optionCountryName}`;
                 break;
             case 2:
-                return ` ${optionTerritorial}`;
+                return ` ${optionTerritorial||10000}`;
                 break;
             case 3:
                 return ` ${optionNumberPopulation}`;
@@ -76,7 +76,7 @@ function OptionAnswer() {
     function showCorrect() {
         for (var i = 0; i < 4; i++) {
             console.log(i)
-            data && data[0].map((e, index) => {
+            data && data.map((e, index) => {
                 if (index === questionPosition) {
                     const optionCorrect = document.getElementById(`option-${i}`);
                     console.log(e.name)

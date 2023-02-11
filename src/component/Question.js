@@ -21,7 +21,7 @@ function Asking(props) {
     var pos = props.pos;
     var countries = props.countries;
     var value = props.value;
-    countries && countries[0].map((e, i) => {        
+    countries && countries.map((e, i) => {        
         if (i === pos) {
             //console.log('O corrento', props.pos)
             //console.log(e);
