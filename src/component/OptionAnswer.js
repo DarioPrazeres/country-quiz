@@ -7,7 +7,7 @@ function OptionAnswer() {
     
     useEffect(() => {
         console.log("POSITION", questionPosition)
-    }, [questionPosition, point])
+    }, [questionPosition, point, played])
     function controlOption(num) {
         setOption(c => c = numbers());
         setCont((t) => t = numberRandom());
@@ -43,16 +43,7 @@ function OptionAnswer() {
                 break;
         }
     }
-    function updateButton(value, id) {
-        setPlayed((c)=> c+1);
-        console.log("JOGADA", played);
-        console.log("MODE", cont)
-        console.log("POINT",point);
-        if(played ===5){
-            alert("JOGADAS ESGOTADAS");
-            setPoint((c)=>c=0);
-            setPlayed((c)=>c=0);
-        }        
+    function updateButton(value, id) {    
         document.getElementById('nextQuestion').style.height = '550px';
         document.getElementById('next').style.display = 'block'
         switch (corectAnswer(showOption(data, option[value], questionPosition), questionPosition)) {
@@ -71,6 +62,13 @@ function OptionAnswer() {
                 break;
         }
         document.getElementById('next').addEventListener('click', () => {
+            setPlayed((c)=> c = played+1);
+            console.log("JOGADA", played);
+            if(played === 4){
+                alert("JOGADAS ESGOTADAS");
+                setPoint((c)=>c=0);
+                setPlayed((c)=>c=0);
+            }    
             for (var i = 0; i < 4; i++) {
                 document.getElementById(`option-${i}`).classList.remove("incorrect");
                 document.getElementById(`option-${i}`).classList.remove("correct");

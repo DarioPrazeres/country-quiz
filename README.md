@@ -12,7 +12,7 @@
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://darioprazeres.github.io/country-quiz/">
       Solution
     </a>
     <span> | </span>

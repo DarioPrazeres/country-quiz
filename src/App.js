@@ -20,8 +20,8 @@ function App() {
   const [textQuestion, setTextQuestion] = useState();
   const [questionPosition, setQuestionPosition] = useState(numbersRandom())
   const [country, setCountry] = useState()
-  const [data] = useFetch('https://restcountries.com/v2/all');
-  console.log(data)
+  const [data] = dataFile//useFetch('https://restcountries.com/v2/all');
+  //console.log(data)
   return (
     <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition, optionVerify, setOptionVerify, point, setPoint, played, setPlayed}}>
       <section className="App">
