@@ -60,9 +60,7 @@ function OptionAnswer() {
         }
         document.getElementById('next').addEventListener('click', () => {
             setPlayed((c)=> c = played+1);
-            console.log("JOGADA", played);
             if(played === 5){
-                setPlayed((c)=>c=1);
                 document.getElementById('result').style.display = "flex";
                 document.getElementById('nextQuestion').style.display = "none";
                 document.getElementById('iconWorld').style.display = "none";
@@ -78,9 +76,16 @@ function OptionAnswer() {
             document.getElementById('nextQuestion').style.height = '500px';
         })
         document.getElementById('tryAgain').addEventListener('click', () => {
-            setPoint(0);
-            console.log('PLayed', played);
-            console.log('Point', point)
+            if(played === 5){
+                console.log(played)
+                console.log(point)
+                console.log('RESET');
+
+                setPoint((c)=> c = 0)
+                setPlayed((c)=> c = 0)
+                console.log(point)
+                console.log(played)
+            }
             document.getElementById('nextQuestion').style.display = "block";
             document.getElementById('iconWorld').style.display = "none";
             document.getElementById('result').style.display = "none";
