@@ -20,31 +20,31 @@ function App() {
   const [textQuestion, setTextQuestion] = useState();
   const [questionPosition, setQuestionPosition] = useState(numbersRandom())
   const [country, setCountry] = useState()
-  const [data] = dataFile//useFetch('https://restcountries.com/v2/all');
+  const [data] = useFetch('https://restcountries.com/v2/all');
   //console.log(data)
   return (
-    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition, optionVerify, setOptionVerify, point, setPoint, played, setPlayed}}>
+    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition, optionVerify, setOptionVerify, point, setPoint, played, setPlayed }}>
       <section className="App">
         <div className='title'>
           <h1>Country Quiz</h1>
-          <img src={worldIcon} alt='world picture' className='iconWorld'/>  
+          <img src={worldIcon} id='iconWorld' alt='world picture' className='iconWorld' />
         </div>
         <div id='nextQuestion' className='questionSection'>
-          <Question />
-          <OptionAnswer />
-          <Result point={point}/>
+            <Question />
+            <OptionAnswer />
         </div>
+        <Result point={point} />
       </section>
     </ContContext.Provider>
   );
 }
-function Result(props){
-  return(
+function Result(props) {
+  return (
     <div id='result' className='result'>
       <img src={cupIcon} />
       <h1>Results</h1>
       <p>You got <span>{props.point}</span> correct answers</p>
-      <button>Try again</button>
+      <button id='tryAgain'>Try again</button>
     </div>
   )
 }

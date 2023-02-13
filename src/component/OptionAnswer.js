@@ -6,7 +6,8 @@ function OptionAnswer() {
     const { option, setOption,point, setPoint, data, setCont, cont, questionPosition, setQuestionPosition, played, setPlayed} = useContext(ContContext);
     
     useEffect(() => {
-        console.log("POSITION", questionPosition)
+        //console.log("POINT", point)
+        //console.log("PLAYED", played)
     }, [questionPosition, point, played])
     function controlOption(num) {
         setOption(c => c = numbers());
@@ -20,9 +21,6 @@ function OptionAnswer() {
                 optionCountryName = e.name;
                 optionNameContinent = e.continent || e.region;
                 optionNumberPopulation = e.population
-                if (optionTerritorial === undefined) {
-
-                }
             }
         })
         switch (cont) {
@@ -38,7 +36,7 @@ function OptionAnswer() {
             case 3:
                 return ` ${optionNumberPopulation}`;
                 break;
-            default:
+            case 4:
                 return ` ${optionNameContinent}`;
                 break;
         }
@@ -50,9 +48,8 @@ function OptionAnswer() {
             case true:
                 document.getElementById(`${id}`).classList.add("correct");
                 document.getElementById(`${id}`).classList.remove("neutro");
-                console.log("ACERTEI ANTES",point);
-                setPoint((c)=> c + 1);
-                console.log("ACERTEI DEPOIS",point);
+                setPoint((c)=> c = point + 1);
+                console.log("Point", point)
                 break;
 
             case false:
@@ -64,10 +61,11 @@ function OptionAnswer() {
         document.getElementById('next').addEventListener('click', () => {
             setPlayed((c)=> c = played+1);
             console.log("JOGADA", played);
-            if(played === 4){
-                alert("JOGADAS ESGOTADAS");
-                setPoint((c)=>c=0);
-                setPlayed((c)=>c=0);
+            if(played === 5){
+                setPlayed((c)=>c=1);
+                document.getElementById('result').style.display = "flex";
+                document.getElementById('nextQuestion').style.display = "none";
+                document.getElementById('iconWorld').style.display = "none";
             }    
             for (var i = 0; i < 4; i++) {
                 document.getElementById(`option-${i}`).classList.remove("incorrect");
@@ -79,7 +77,14 @@ function OptionAnswer() {
             document.getElementById('next').style.display = 'none';
             document.getElementById('nextQuestion').style.height = '500px';
         })
-        
+        document.getElementById('tryAgain').addEventListener('click', () => {
+            setPoint(0);
+            console.log('PLayed', played);
+            console.log('Point', point)
+            document.getElementById('nextQuestion').style.display = "block";
+            document.getElementById('iconWorld').style.display = "none";
+            document.getElementById('result').style.display = "none";
+        });
     }
     function showCorrect() {
         for (var i = 0; i < 4; i++) {

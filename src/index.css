@@ -37,7 +37,6 @@ h1 {
 }
 
 /*---------APP Style-------*/
-
 .questionSection {
   background: white;
   width: 464px;
@@ -62,7 +61,7 @@ h1 {
 }
 /*----------Winner -------*/
 #result{
-  
+  display: none;
 }
 .result{
   width: 464px;
