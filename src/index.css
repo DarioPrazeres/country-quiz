@@ -40,7 +40,7 @@ h1 {
 .questionSection {
   background: white;
   width: 464px;
-  height: 500px;
+  height: 550px;
   border-radius: 24px;
   padding: 50px 10px 10px 17px;
 }
@@ -138,6 +138,9 @@ h1 {
   margin: 15px 0px 15px 7px;
   padding-left: 4px;
 }
+.option-0:disabled{
+  background: #fff;
+}
 .nextQuestion{
   width: 116px;
   height: 56px;
@@ -161,12 +164,10 @@ h1 {
   display: block;
 }
 .dp{
-  border: solid 1px red;
 }
 .imgFlag{
   width: 84px;
   height: 54px;
-  border: solid 1px red;
 }
 #next{
   display: none;

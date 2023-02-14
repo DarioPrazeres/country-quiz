@@ -6,9 +6,7 @@ function OptionAnswer() {
     const { option, setOption,point, setPoint, data, setCont, cont, questionPosition, setQuestionPosition, played, setPlayed} = useContext(ContContext);
     
     useEffect(() => {
-        //console.log("POINT", point)
-        //console.log("PLAYED", played)
-    }, [questionPosition, point, played])
+    }, [questionPosition])
     function controlOption(num) {
         setOption(c => c = numbers());
         setCont((t) => t = numberRandom());
@@ -59,7 +57,7 @@ function OptionAnswer() {
                 break;
         }
         document.getElementById('next').addEventListener('click', () => {
-            setPlayed((c)=> c = played+1);
+            setPlayed(played + 1);
             if(played === 5){
                 document.getElementById('result').style.display = "flex";
                 document.getElementById('nextQuestion').style.display = "none";
@@ -75,21 +73,6 @@ function OptionAnswer() {
             document.getElementById('next').style.display = 'none';
             document.getElementById('nextQuestion').style.height = '500px';
         })
-        document.getElementById('tryAgain').addEventListener('click', () => {
-            if(played === 5){
-                console.log(played)
-                console.log(point)
-                console.log('RESET');
-
-                setPoint((c)=> c = 0)
-                setPlayed((c)=> c = 0)
-                console.log(point)
-                console.log(played)
-            }
-            document.getElementById('nextQuestion').style.display = "block";
-            document.getElementById('iconWorld').style.display = "none";
-            document.getElementById('result').style.display = "none";
-        });
     }
     function showCorrect() {
         for (var i = 0; i < 4; i++) {

@@ -32,24 +32,24 @@ function Asking(props) {
     }
     switch (value) {
         case 0:
-            return <p className="question-p"> {capital} is the capital of ... ${pos}</p>;
+            return <p className="question-p"> {capital} is the capital of ... </p>;
             break;
         case 1:
             return (
                 <div className="dp">
                     <img className="imgFlag" src={url} alt="flag" />
-                    <p className="question-p"> Which countries this flag belong to? {pos}</p>
+                    <p className="question-p"> Which countries this flag belong to?</p>
                 </div>
             )
             break;
         case 2:
-            return <p className="question-p"> What is {name}'s territorial extension? ${pos}</p>;
+            return <p className="question-p"> What is {name}'s territorial extension?</p>;
             break;
         case 3:
-            return <p className="question-p"> What is the population of ${name}  ${pos}</p>;
+            return <p className="question-p"> What is the population of ${name}</p>;
             break;
         default:
-            return <p className="question-p"> What continent {name} belongs to?  ${pos} </p>;
+            return <p className="question-p"> What continent {name} belongs to?</p>;
             break;
     }
 }
