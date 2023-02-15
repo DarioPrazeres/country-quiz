@@ -46,7 +46,7 @@ function Asking(props) {
             return <p className="question-p"> What is {name}'s territorial extension?</p>;
             break;
         case 3:
-            return <p className="question-p"> What is the population of ${name}</p>;
+            return <p className="question-p"> What is the population of {name}</p>;
             break;
         default:
             return <p className="question-p"> What continent {name} belongs to?</p>;
