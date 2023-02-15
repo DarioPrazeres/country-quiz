@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useContext } from "react";
 import { ContContext } from "../App";
 import { numberRandom } from "./Question";
 function OptionAnswer() {
-    const { option, setOption,point, setPoint, data, setCont, cont, questionPosition, setQuestionPosition, played, setPlayed} = useContext(ContContext);
-    
-    useEffect(() => {
-    }, [questionPosition])
-    function controlOption(num) {
+    const { option, setOption, data, setCont, cont, questionPosition, setQuestionPosition, setPoint } = useContext(ContContext);
+    function controlOption() {
         setOption(c => c = numbers());
         setCont((t) => t = numberRandom());
     }
@@ -29,7 +26,7 @@ function OptionAnswer() {
                 return ` ${optionCountryName}`;
                 break;
             case 2:
-                return ` ${optionTerritorial||10000}`;
+                return ` ${optionTerritorial || 10000}`;
                 break;
             case 3:
                 return ` ${optionNumberPopulation}`;
@@ -39,15 +36,14 @@ function OptionAnswer() {
                 break;
         }
     }
-    function updateButton(value, id) {    
+    function updateButton(value, id) {
         document.getElementById('nextQuestion').style.height = '550px';
         document.getElementById('next').style.display = 'block'
         switch (corectAnswer(showOption(data, option[value], questionPosition), questionPosition)) {
             case true:
                 document.getElementById(`${id}`).classList.add("correct");
                 document.getElementById(`${id}`).classList.remove("neutro");
-                setPoint((c)=> c = point + 1);
-                console.log("Point", point)
+                setPoint((c)=> c+1);
                 break;
 
             case false:
@@ -56,23 +52,6 @@ function OptionAnswer() {
                 showCorrect();
                 break;
         }
-        document.getElementById('next').addEventListener('click', () => {
-            setPlayed(played + 1);
-            if(played === 5){
-                document.getElementById('result').style.display = "flex";
-                document.getElementById('nextQuestion').style.display = "none";
-                document.getElementById('iconWorld').style.display = "none";
-            }    
-            for (var i = 0; i < 4; i++) {
-                document.getElementById(`option-${i}`).classList.remove("incorrect");
-                document.getElementById(`option-${i}`).classList.remove("correct");
-                document.getElementById(`option-${i}`).classList.add("neutro");
-            }
-            controlOption(value);
-            setQuestionPosition(c => c = numbersRandom());
-            document.getElementById('next').style.display = 'none';
-            document.getElementById('nextQuestion').style.height = '500px';
-        })
     }
     function showCorrect() {
         for (var i = 0; i < 4; i++) {
@@ -82,17 +61,17 @@ function OptionAnswer() {
                     if (e.name === optionCorrect.outerText) {
                         optionCorrect.classList.remove("neutro");
                         optionCorrect.classList.add("correct");
-                    }else if(cont===4){
-                        if (e.continent||e.region === optionCorrect.outerText) {
+                    } else if (cont === 4) {
+                        if (e.continent || e.region === optionCorrect.outerText) {
                             optionCorrect.classList.remove("neutro");
                             optionCorrect.classList.add("correct");
                         }
-                    }else if(cont===2){
+                    } else if (cont === 2) {
                         if (e.area === Number(optionCorrect.outerText)) {
                             optionCorrect.classList.remove("neutro");
                             optionCorrect.classList.add("correct");
                         }
-                    }else if(cont===3){
+                    } else if (cont === 3) {
                         if (e.population === Number(optionCorrect.outerText)) {
                             optionCorrect.classList.remove("neutro");
                             optionCorrect.classList.add("correct");
@@ -119,7 +98,24 @@ function OptionAnswer() {
                     updateButton(3, 'option-3');
                 }}
             ><p id="p-3">{optionText(showOption(data, option[3], questionPosition))}</p></button>
-            <button id="next" className="nextQuestion">Next</button>
+            <button id="next" className="nextQuestion" onClick={() => {
+                localStorage.setItem("played", Number(localStorage.getItem("played")) + 1);
+                if (Number(localStorage.getItem("played")) >= 5) {
+                    localStorage.setItem("played", 0)
+                    document.getElementById('result').style.display = "flex";
+                    document.getElementById('nextQuestion').style.display = "none";
+                    document.getElementById('iconWorld').style.display = "none";
+                }
+                for (var i = 0; i < 4; i++) {
+                    document.getElementById(`option-${i}`).classList.remove("incorrect");
+                    document.getElementById(`option-${i}`).classList.remove("correct");
+                    document.getElementById(`option-${i}`).classList.add("neutro");
+                }
+                document.getElementById('next').style.display = 'none';
+                document.getElementById('nextQuestion').style.height = '500px';
+                setQuestionPosition(c => c = numbersRandom());
+                controlOption()
+            }}>Next</button>
         </div>
     )
 }
