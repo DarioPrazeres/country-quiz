@@ -37,38 +37,30 @@
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](https://github.com/DarioPrazeres/country-quiz/blob/main/src/banner.png)
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
-
-- Where can I see your demo?
-- What was your experience?
-- What have you learned/improved?
-- Your wisdom? :)
+This project is a country quiz, where you find a questions about many countries. You can answer questions about capital, flag, population and continent. 
+My experience was very good, it is not a ease project perhaps more hard that you can notice, but with this project improve me some as react, css and api.
 
 ### Built With
 
 <!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
 
 - [React](https://reactjs.org/)
-- [Vue.js](https://vuejs.org/)
-- [Tailwind](https://tailwindcss.com/)
-
-## Features
-
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
-
-This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/Bu3G2irnaXmfwQ8sZkw8) was to build an application to complete the given user stories.
+- [Redux](https://reactjs.redux.org/)
+- [JavaScript](https://nodejs.org/) 
+- [CSS](https://html.com/css/)
+- [NPM](https://npmjs.com/)
+- A code editor as:[VS code](https://code.visualstudio.com/)
+- [CountriesAPI](https://restcountries.com/v2/all)
 
 ## How To Use
 
 <!-- Example: -->
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
-
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
+$ $ git clone https://github.com/DarioPrazeres/country-quiz
 
 # Install dependencies
 $ npm install
@@ -87,6 +79,5 @@ $ npm start
 
 ## Contact
 
-- Website [your-website.com](https://{your-web-site-link})
-- GitHub [@your-username](https://{github.com/your-usermame})
-- Twitter [@your-twitter](https://{twitter.com/your-username})
+- GitHub [@DarioPrazeres](https://github.com/DarioPrazeres)
+- Twitter [@dario_prazeres](https://twitter.com/dario_prazeres)
