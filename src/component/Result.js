@@ -12,7 +12,7 @@ function Result(props) {
             <button id='tryAgain' onClick={() => {
                 localStorage.clear();
                 document.getElementById('nextQuestion').style.display = "block";
-                document.getElementById('iconWorld').style.display = "none";
+                document.getElementById('iconWorld').style.display = "block";
                 document.getElementById('result').style.display = "none";
                 setPoint(0);
             }}>Try again</button>
