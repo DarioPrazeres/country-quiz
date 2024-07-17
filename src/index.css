@@ -29,7 +29,7 @@ h1 {
   position: relative;
 }
 
-.iconWorld {
+.icon-World {
   width: 162px;
   height: 100px;
   position: absolute;
@@ -152,9 +152,9 @@ h1 {
   padding-left: 4px;
 }
 
-.option-0:disabled {
+/* .option-0:disabled {
   background: #fff;
-}
+} */
 
 .nextQuestion {
   width: 116px;
@@ -182,7 +182,6 @@ h1 {
   display: block;
 }
 
-.dp {}
 
 .imgFlag {
   width: 84px;

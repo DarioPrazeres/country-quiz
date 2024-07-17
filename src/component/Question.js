@@ -16,24 +16,26 @@ function numberRandom(){
 }
 
 function Asking(props) {
-    var capital, name, url;
+    var capital, name, url,continent;
     var pos = props.pos;
     var countries = props.countries;
     var value = props.value;
+    //const valoresUnicos = gerarValoresUnicos(100);
     countries && countries.map((e, i) => {        
         if (i === pos) {
             capital = e.capital;
-            name = e.name;
+            name = e.name.common;
             url = e.flags.png;
+            continent = e.continents[0]
         }
     })
     if(capital=== undefined){
         value ++;
     }
+    console.log(continent)
     switch (value) {
         case 0:
             return <p className="question-p"> {capital} is the capital of ... </p>;
-            break;
         case 1:
             return (
                 <div className="dp">
@@ -41,17 +43,25 @@ function Asking(props) {
                     <p className="question-p"> Which countries this flag belong to?</p>
                 </div>
             )
-            break;
         case 2:
             return <p className="question-p"> What is {name}'s territorial extension?</p>;
-            break;
         case 3:
             return <p className="question-p"> What is the population of {name}</p>;
-            break;
         default:
             return <p className="question-p"> What continent {name} belongs to?</p>;
-            break;
     }
 }
+/*function gerarValoresUnicos(quantidade) {
+    const valores = [];
+    while (valores.length < quantidade) {
+        const valor = Math.floor(Math.random() * 100) + 1;
+        if (!valores.includes(valor)) {
+            valores.push(valor);
+        }
+    }
+    return valores;
+}*/
+
+
 export {numberRandom}
 export default Question;

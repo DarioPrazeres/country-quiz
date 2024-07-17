@@ -1,7 +1,7 @@
 {
   "homepage": "http://darioprazeres.github.io/country-quiz",
   "name": "country-quiz",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
