@@ -18,12 +18,11 @@ function App() {
   const [questionPosition, setQuestionPosition] = useState(numbersRandom())
   const [country, setCountry] = useState()
   const [data] = useFetch('https://restcountries.com/v3.1/all') || data;
+  const continents = ["Africa", "Asia" ,"North America", "South America", "Antarctica", "Europe", "Oceania"];
 
-  //console.log(data)
-  //setCont(4);
-  //console.log(option)
+
   return (
-    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition, optionVerify, setOptionVerify, point, setPoint}}>
+    <ContContext.Provider value={{ cont, setCont, option, setOption, textQuestion, setTextQuestion, data, country, setCountry, questionPosition, setQuestionPosition, optionVerify, setOptionVerify, point, setPoint, continents}}>
       <section className="App">
         <div className='title'>
           <h1>Country Quiz</h1>

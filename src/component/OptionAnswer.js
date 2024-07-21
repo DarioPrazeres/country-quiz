@@ -2,28 +2,32 @@ import React, { useContext } from "react";
 import { ContContext } from "../App";
 import { numberRandom } from "./Question";
 
+var IndexContinents = null;
+var continentSelected = null;
+
 function OptionAnswer() {
-  const { option, setOption, data, setCont, cont, questionPosition, setQuestionPosition, setPoint } = useContext(ContContext);
+  const { option, setOption, data, setCont, cont, questionPosition, setQuestionPosition, setPoint, continents } = useContext(ContContext);
+
+  if (cont === 4) {
+    continentSelected = continents.indexOf(data[questionPosition].continents[0]);
+    IndexContinents = getArrayWithNumber(continentSelected);
+  }
 
   function controlOption() {
     setOption(numbers());
-    setCont(4); //numberRandom()
+    setCont(numberRandom()); 
   }
+
   function optionText(valuePos) {
-    console.log(valuePos)
     if (!data) return '';
 
     const country = data[valuePos];
     if (!country) return '';
-
     const optionTerritorial = Number(country.area).toLocaleString('pt') + ' Km²';
     const optionCountryName = country.name ? country.name.common : '';
-    const optionNameContinent = country.continents ? country.continents[0] : country.region;
+    const optionNameContinent = continents[valuePos];
     const optionNumberPopulation = Number(country.population).toLocaleString('pt');
     switch (cont) {
-      /* case 0:
-      case 1:
-        return optionCountryName;*/
       case 2:
         return optionTerritorial || Number(10000).toLocaleString('pt');
       case 3:
@@ -38,7 +42,14 @@ function OptionAnswer() {
   function updateButton(value, id) {
     document.getElementById('nextQuestion').style.height = '550px';
     document.getElementById('next').style.display = 'block';
-    const correct = corectAnswer(showOption(data, option[value], questionPosition), questionPosition);
+    let correct = null;
+
+    if (cont === 4) {
+      correct = ValidAnswerContinent(continents, id, continentSelected);
+    } else {
+      correct = correctAnswer(showOption(cont, option[value], questionPosition), questionPosition, cont);
+    }
+
     if (correct) {
       document.getElementById(id).classList.add("correct");
       document.getElementById(id).classList.remove("neutro");
@@ -48,6 +59,7 @@ function OptionAnswer() {
       document.getElementById(id).classList.remove("neutro");
       showCorrect();
     }
+
     bloquearOutrosBotoes(true);
   }
 
@@ -60,10 +72,20 @@ function OptionAnswer() {
   function showCorrect() {
     for (let i = 0; i < 4; i++) {
       const optionCorrect = document.getElementById(`option-${i}`);
-      if(option[i] === 0) {
-        optionCorrect.classList.add("correct");
-        optionCorrect.classList.remove("neutro");        
-      }      
+      if (optionCorrect) {
+        let continentSelectedText = optionCorrect.querySelector("p").textContent;
+        if (cont === 4) {
+          if (continents[continentSelected] === continentSelectedText) {
+            optionCorrect.classList.add("correct");
+            optionCorrect.classList.remove("neutro");
+          }
+        } else {
+          if (option[i] === 0) {
+            optionCorrect.classList.add("correct");
+            optionCorrect.classList.remove("neutro");
+          }
+        }
+      }
     }
   }
 
@@ -78,7 +100,7 @@ function OptionAnswer() {
             updateButton(index, `option-${index}`);
           }}
         >
-          <p id={`p-${index}`}>{optionText(showOption(data, opt, questionPosition))}</p>
+          <p id={`p-${index}`}>{optionText(showOption(cont, opt, questionPosition))}</p>
         </button>
       ))}
 
@@ -111,24 +133,57 @@ function OptionAnswer() {
   );
 }
 
-function showOption(array, pos, currentPosition) {
-  if (currentPosition + 4 >= 250) {
-    return currentPosition - pos;
+function showOption(cont, pos, currentPosition) {
+  if (cont === 4) {
+    return IndexContinents[pos];
   } else {
-    return currentPosition + pos;
+    if (currentPosition + 4 >= 250) {
+      return currentPosition - pos;
+    } else {
+      return currentPosition + pos;
+    }
   }
 }
 
 function numbers() {
-    return Array(4).fill().map((a, i) => a = i).sort(() => Math.random() - 0.5)
+  return Array(4).fill().map((a, i) => a = i).sort(() => Math.random() - 0.5);
 }
 
 function numbersRandom() {
   return Math.floor(Math.random() * 250);
 }
 
-function corectAnswer(position, corectPosition) {
+function ValidAnswerContinent(continentArray, IdObject, positionCorrect) {
+  const optionId = document.getElementById(IdObject);
+  let continentSelected = optionId.querySelector("p").textContent;
+  return continentArray[positionCorrect] === continentSelected;
+}
+
+function correctAnswer(position, corectPosition, cont) {
+  if (cont === 4) {
+    return IndexContinents[position] === corectPosition;
+  }
   return position === corectPosition;
+}
+
+function getArrayWithNumber(number) {
+  const size = 4;
+  const values = [0, 1, 2, 3, 4, 5, 6];
+  const result = [];
+
+  const possibleValues = values.filter(val => val !== number);
+
+  while (result.length < size - 1) {
+    const randomIndex = Math.floor(Math.random() * possibleValues.length);
+    const randomValue = possibleValues[randomIndex];
+    if (!result.includes(randomValue)) {
+      result.push(randomValue);
+    }
+  }
+  const randomPosition = Math.floor(Math.random() * size);
+  result.splice(randomPosition, 0, number);
+
+  return result;
 }
 
 export { numbers, numbersRandom };

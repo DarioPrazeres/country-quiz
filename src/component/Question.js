@@ -32,7 +32,7 @@ function Asking(props) {
     if(capital=== undefined){
         value ++;
     }
-    console.log(continent)
+    
     switch (value) {
         case 0:
             return <p className="question-p"> {capital} is the capital of ... </p>;
@@ -61,6 +61,9 @@ function Asking(props) {
     }
     return valores;
 }*/
+
+
+
 
 
 export {numberRandom}
