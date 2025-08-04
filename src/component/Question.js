@@ -19,7 +19,6 @@ function Asking(props) {
     var pos = props.pos;
     var countries = props.countries;
     var value = props.value;
-    console.log(countries);
     countries && countries.map((e, i) => {        
         if (i === pos) {
             capital = e.capital;
