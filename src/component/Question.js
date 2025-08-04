@@ -4,7 +4,6 @@ import { ContContext } from "../App";
 
 function Question() {
     const {questionPosition, cont, data} = useContext(ContContext);
-    
     return (
         <div>
             <Asking countries={data} value={cont} pos={questionPosition} />
@@ -16,17 +15,16 @@ function numberRandom(){
 }
 
 function Asking(props) {
-    var capital, name, url,continent;
+    var capital, name, url;
     var pos = props.pos;
     var countries = props.countries;
     var value = props.value;
-    //const valoresUnicos = gerarValoresUnicos(100);
+    console.log(countries);
     countries && countries.map((e, i) => {        
         if (i === pos) {
             capital = e.capital;
             name = e.name.common;
             url = e.flags.png;
-            continent = e.continents[0]
         }
     })
     if(capital=== undefined){
@@ -51,20 +49,6 @@ function Asking(props) {
             return <p className="question-p"> What continent {name} belongs to?</p>;
     }
 }
-/*function gerarValoresUnicos(quantidade) {
-    const valores = [];
-    while (valores.length < quantidade) {
-        const valor = Math.floor(Math.random() * 100) + 1;
-        if (!valores.includes(valor)) {
-            valores.push(valor);
-        }
-    }
-    return valores;
-}*/
-
-
-
-
 
 export {numberRandom}
 export default Question;
