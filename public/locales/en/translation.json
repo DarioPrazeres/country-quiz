@@ -1,3 +1,13 @@
 {
-  "welcome": "Welcome, {{name}}. Thank you for visiting our website!"
+  "welcome": "Welcome, {{name}}. Thank you for visiting our website!",
+  "create_by": "Created by ",
+  "try_again": "Try again",
+  "results": "Results",
+  "correct": "correct answers",  
+  "you_got": "you got",
+  "question_capital": "{{capital}} is the capital of which country?",
+  "question_flag": "This is the flag of which country?",
+  "question_territory": "What is the land area of {{country}}?",
+  "question_population": "What is the population of {{country}}?",
+  "question_continent": "Which continent does {{country}} belong to?"
 }

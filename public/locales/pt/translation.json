@@ -1,3 +1,13 @@
 {
-  "welcome": "Bem-vindo, {{name}}. Obrigado por acessar o nosso site!"
+  "welcome": "Bem-vindo, {{name}}. Obrigado por acessar o nosso site!",
+  "create_by": "Criado por ",
+  "try_again": "Tente novamente",
+  "results": "Resultados",
+  "correct": "respostas corretas",  
+  "you_got": "você obteve",
+  "question_capital": "{{capital}} é a capital de que país?",
+  "question_flag": "Esta é a bandeira de que país?",
+  "question_territory": "Qual é a extensão territorial de {{country}}?",
+  "question_population": "Qual é a população de {{country}}?",
+  "question_continent": "Em que continente {{country}} pertence?"
 }
