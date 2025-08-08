@@ -152,9 +152,30 @@ h1 {
   padding-left: 4px;
 }
 
-/* .option-0:disabled {
-  background: #fff;
-} */
+/*LanguageSelector*/
+.language-selector {
+  display: inline-block;
+}
+
+.language-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.language-select:hover {
+  border-color: #999;
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
 
 .nextQuestion {
   width: 116px;
