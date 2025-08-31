@@ -3,7 +3,7 @@ Analisando o que mostraste, há várias melhorias técnicas e organizacionais qu
 
 ---
 
-## 🔧 Melhorias Técnicas
+##  Melhorias Técnicas
 
 1. **Remover manipulação direta do DOM (`document.getElementById`)**
 
