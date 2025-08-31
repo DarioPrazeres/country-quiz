@@ -26,18 +26,18 @@
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Overview](#overview)
   - [Built With](#built-with)
-- [Features](#features)
-- [How to use](#how-to-use)
-- [Contact](#contact)
+- [How To Use](#how-to-use)
 - [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
 
 <!-- OVERVIEW -->
 
 ## Overview
 
-![screenshot](https://github.com/DarioPrazeres/country-quiz/blob/main/src/banner.png)
+![screenshot](https://github.com/DarioPrazeres/country-quiz/blob/main/banner.png)
 
 This project is a country quiz, where you find a questions about many countries. You can answer questions about capital, flag, population and continent. 
 My experience was very good, it is not a ease project perhaps more hard that you can notice, but with this project improve me some as react, css and api.

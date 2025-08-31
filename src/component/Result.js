@@ -7,7 +7,7 @@ function Result(props) {
     const { setPoint, t } = useContext(ContContext)
     return (
         <div id='result' className='result'>
-            <img src={cupIcon} />
+            <img src={cupIcon} alt="flags for country" />
             <h1>{t("results")}</h1>
             <p>{t("you_got")} <span>{props.point}</span> {t("correct")}</p>
             <button id='tryAgain' onClick={() => {

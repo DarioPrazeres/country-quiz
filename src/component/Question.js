@@ -11,7 +11,8 @@ function Question() {
     )
 }
 function numberRandom(){
-  return Math.floor(Math.random()*5);
+    return 7;
+    return Math.floor(Math.random()*8);
 }
 
 function Asking(props) {
@@ -45,7 +46,15 @@ function Asking(props) {
             return <p className="question-p"> {t("question_territory", {country: name})}</p>;
         case 3:
             return <p className="question-p"> {t("question_population", {country: name})}</p>;
-        default:
+        case 4:
+            return <p className="question-p"> {t("question_region", {country: name})}</p>;
+        case 5:
+            return <p className="question-p"> {t("question_language", {country: name})}</p>;
+        case 6:
+            return <p className="question-p"> {t("question_currency", {country: name})}</p>;
+        case 8:
+            return <p className="question-p"> {t("question_map", {country: name})}</p>;
+        case 7:
             return <p className="question-p"> {t("question_continent", {country: name})}</p>;
     }
 }
