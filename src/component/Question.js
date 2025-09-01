@@ -6,17 +6,17 @@ function Question() {
     const {questionPosition, cont, data, t} = useContext(ContContext);
     return (
         <div>
-            <Asking countries={data} value={cont} pos={questionPosition} traslate = {t}/>
+            <Asking countries={data} value={cont} pos={questionPosition} traslate={t}/>
         </div>
     )
 }
 function numberRandom(){
-    return 7;
-    return Math.floor(Math.random()*8);
+    return 6;
+    //return Math.floor(Math.random()*8);
 }
 
 function Asking(props) {
-    var capital, name, url;
+    var capital, name, url, currency;
     var pos = props.pos;
     var countries = props.countries;
     var value = props.value;
@@ -26,9 +26,11 @@ function Asking(props) {
             capital = e.capital;
             name = e.name.common;
             url = e.flags.png;
+            currency = e.currencies
         }
     })
-    if(capital=== undefined){
+    console.log(currency)
+    if(capital === undefined || currency === undefined){
         value ++;
     }
     
@@ -54,7 +56,7 @@ function Asking(props) {
             return <p className="question-p"> {t("question_currency", {country: name})}</p>;
         case 8:
             return <p className="question-p"> {t("question_map", {country: name})}</p>;
-        case 7:
+        default:
             return <p className="question-p"> {t("question_continent", {country: name})}</p>;
     }
 }

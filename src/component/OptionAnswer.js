@@ -11,8 +11,14 @@ function OptionAnswer() {
     cont,
     questionPosition,
     setQuestionPosition,
+    played, 
+    setShowResult,
+    setPlayed,
     setPoint,
     continents,
+    languages,
+    subregions,
+    currencies
   } = useContext(ContContext);
 
   const [selected, setSelected] = useState(null); 
@@ -27,10 +33,57 @@ function OptionAnswer() {
 
   const indexContinents = useMemo(() => {
     if (continentSelected !== null) {
-      return getArrayWithNumber(continentSelected);
+      return getArrayWithNumber(continentSelected, continents.length);
     }
     return [];
   }, [continentSelected]);
+
+  const subregionSelected = useMemo(() => {
+    if (cont === 4 && data[questionPosition]) {
+      return subregions.indexOf(data[questionPosition].subregion);
+    }
+    return null;
+  }, [cont, questionPosition, data, subregions]);
+
+  const indexSubregions = useMemo(() => {
+    if (subregionSelected !== null) {
+      return getArrayWithNumber(subregionSelected, subregions.length);
+    }
+    return [];
+  }, [subregionSelected]);
+
+  const languagesSelected = useMemo(() => {
+    if (cont === 5 && data[questionPosition] && data[questionPosition].languages) {
+      const langs = Object.values(data[questionPosition].languages); 
+      const randomLang = langs[Math.floor(Math.random() * langs.length)]; 
+      return languages.indexOf(randomLang); 
+    }
+    return null;
+  }, [cont, questionPosition, data, languages]);
+
+  const indexLanguages = useMemo(() => {
+    if (languagesSelected !== null) {
+      return getArrayWithNumber(languagesSelected, languages.length);
+    }
+    return [];
+  }, [languagesSelected]);
+
+  const currencySelected = useMemo(() => {
+    if (cont === 6 && data[questionPosition] && data[questionPosition].currencies) {
+      const coins = Object.values(data[questionPosition].currencies); 
+      const randomCoin = coins[Math.floor(Math.random() * coins.length)]; 
+      return currencies.indexOf(randomCoin); 
+    }
+    return "No Currency";
+  }, [cont, questionPosition, data, languages]);
+
+  const indexCurrencies = useMemo(() => {
+    if (currencySelected !== null) {
+      return getArrayWithNumber(currencySelected, currencies.length);
+    }
+    return [];
+  }, [currencySelected]);
+
 
   function getOptionText(valuePos) {
     const country = data[valuePos];
@@ -42,8 +95,11 @@ function OptionAnswer() {
       case 3:
         return Number(country.population).toLocaleString("pt");
       case 4:
+        return subregions[valuePos];
       case 7:
         return continents[valuePos];
+      case 5:
+        return languages[valuePos];
       case 6: {
         const currencyCode = country.currencies
           ? Object.keys(country.currencies)[0]
@@ -58,7 +114,14 @@ function OptionAnswer() {
   function showOption(cont, pos, currentPosition) {
     if (cont === 7) {
       return indexContinents[pos];
-    } else {
+    } 
+    else if (cont === 5) {
+      return indexLanguages[pos];
+    }
+    else if (cont === 4) {
+      return indexSubregions[pos];
+    }
+    else {
       if (currentPosition + 4 >= 250) {
         return currentPosition - pos;
       } else {
@@ -69,10 +132,12 @@ function OptionAnswer() {
 
   function handleSelect(index) {
     if (answered) return; 
-
+    
     const chosenIndex = showOption(cont, option[index], questionPosition);
     const isCorrect =
-      cont === 7 ? chosenIndex === continentSelected : chosenIndex === questionPosition;
+      cont === 7 ? chosenIndex === continentSelected : 
+      cont === 5 ? chosenIndex === languagesSelected : 
+      cont === 4 ? chosenIndex === subregionSelected : chosenIndex === questionPosition;
 
     setSelected(index);
     setAnswered(true);
@@ -88,6 +153,12 @@ function OptionAnswer() {
     setCont(numberRandom());
     setSelected(null);
     setAnswered(false);
+    if (played + 1 >= 5) {
+      setShowResult(true);   
+      setPlayed(0);          
+      return;
+    }
+    else setPlayed(played + 1);
   }
 
   return (
@@ -100,6 +171,8 @@ function OptionAnswer() {
         const isCorrect =
           cont === 7
             ? valuePos === continentSelected
+            : cont === 5 ? valuePos === languagesSelected 
+            : cont === 4 ? valuePos === subregionSelected 
             : valuePos === questionPosition;
 
         let className = "neutro";
@@ -140,11 +213,14 @@ function numbersRandom() {
   return Math.floor(Math.random() * 250);
 }
 
-function getArrayWithNumber(number) {
+function getArrayWithNumber(number, length) {
   const size = 4;
-  const values = [0, 1, 2, 3, 4, 5, 6];
+  const values = [];
   const result = [];
 
+  for(let i = 0; i < length; i++) {
+    values.push(i);
+  }
   const possibleValues = values.filter((val) => val !== number);
 
   while (result.length < size - 1) {

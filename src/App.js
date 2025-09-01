@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 
 export const ContContext = createContext();
 
-// constante global, não precisa recriar a cada render
 const CONTINENTS = [
   "Africa",
   "Asia",
@@ -25,6 +24,8 @@ function App() {
   const [point, setPoint] = useState(0);
   const [option, setOption] = useState(numbers());
   const [questionPosition, setQuestionPosition] = useState(numbersRandom());
+  const [showResult, setShowResult] = useState(false);
+  const [played, setPlayed] = useState(0);
   const { t } = useTranslation();
 
   const [dataAPI, error] = useFetch("https://restcountries.com/v3.1/all");
@@ -35,7 +36,7 @@ function App() {
       ...new Set(
         data
           .filter((c) => c.languages)
-          .map((c) => Object.values(c.languages)[0])
+          .flatMap((c) => Object.values(c.languages))
       ),
     ];
   }, [data]);
@@ -49,6 +50,8 @@ function App() {
       ),
     ];
   }, [data]);
+
+  currencies.push("No Currency")
 
   const subregions = useMemo(() => {
     return [
@@ -70,6 +73,10 @@ function App() {
         setPoint,
         continents: CONTINENTS,
         t,
+        showResult,
+        played, 
+        setPlayed,
+        setShowResult, 
         languages,
         currencies,
         subregions,
@@ -86,12 +93,14 @@ function App() {
           />
         </div>
 
-        <div id="nextQuestion" className="questionSection">
-          <Question />
-          <OptionAnswer />
-        </div>
-
-        <Result point={point} />
+        {!showResult ? (
+            <div className="questionSection">
+              <Question />
+              <OptionAnswer />
+            </div>
+          ) : (
+            <Result point={point} />
+          )}
       </section>
     </ContContext.Provider>
   );
