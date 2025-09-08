@@ -12,5 +12,6 @@
   "question_language": "What is the official language of {{country}}?",
   "question_currency": "What is the official currency of {{country}}?",
   "question_region": "{{country}} belongs to which geographical region?",
-  "question_map": "Which country does the highlighted territory on this map belong to?"
+  "question_map": "Which country does the highlighted territory on this map belong to?",
+  "question_borders": "Which of these countries borders {{country}}?"
 }

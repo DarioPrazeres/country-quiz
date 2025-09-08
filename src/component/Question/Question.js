@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { ContContext } from "../App";
+import { ContContext } from "../../App";
 
 function Question() {
     const {questionPosition, cont, data, t} = useContext(ContContext);
@@ -29,7 +29,6 @@ function Asking(props) {
             currency = e.currencies
         }
     })
-    console.log(currency)
     if(capital === undefined || currency === undefined){
         value ++;
     }

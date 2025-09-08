@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { ContContext } from "../App";
-import cupIcon from "../img/cup.svg";
+import { ContContext } from "../../App";
+import cupIcon from "../../assets/img/cup.svg";
 
 function Result({ point }) {
   const { setPoint, setShowResult, t } = useContext(ContContext);

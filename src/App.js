@@ -1,10 +1,10 @@
 import React, { createContext, useState, useMemo } from "react";
-import useFetch from "./component/useFecth";
-import Question from "./component/Question";
-import OptionAnswer, { numbers, numbersRandom } from "./component/OptionAnswer";
-import Result from "./component/Result";
-import worldIcon from "./img/world.svg";
-import dataOffline from "../data.json";
+import useFetch from "./hooks/useFecth";
+import Question from "./component/Question/Question";
+import OptionAnswer, { numbers, numbersRandom } from "./component/QuestionAnswer/OptionAnswer";
+import Result from "./component/Result/Result";
+import worldIcon from "./assets/img/world.svg";
+import dataOffline from "./data/data.json";
 import { useTranslation } from "react-i18next";
 
 export const ContContext = createContext();

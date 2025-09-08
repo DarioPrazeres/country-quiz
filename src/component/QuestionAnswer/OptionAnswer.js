@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useState } from "react";
-import { ContContext } from "../App";
-import { numberRandom } from "./Question";
+import { ContContext } from "../../App";
+import { numberRandom } from "../Question/Question";
 
 function OptionAnswer() {
   const {
@@ -70,12 +70,15 @@ function OptionAnswer() {
 
   const currencySelected = useMemo(() => {
     if (cont === 6 && data[questionPosition] && data[questionPosition].currencies) {
-      const coins = Object.values(data[questionPosition].currencies); 
-      const randomCoin = coins[Math.floor(Math.random() * coins.length)]; 
-      return currencies.indexOf(randomCoin); 
+      const coins = Object.values(data[questionPosition].currencies);
+      if (coins.length === 0) return null;
+      
+      const randomCoin = coins[Math.floor(Math.random() * coins.length)];
+      return currencies.indexOf(randomCoin.name); // ou .symbol
     }
-    return "No Currency";
-  }, [cont, questionPosition, data, languages]);
+    return null; 
+  }, [cont, questionPosition, data, currencies]);
+
 
   const indexCurrencies = useMemo(() => {
     if (currencySelected !== null) {
@@ -100,12 +103,8 @@ function OptionAnswer() {
         return continents[valuePos];
       case 5:
         return languages[valuePos];
-      case 6: {
-        const currencyCode = country.currencies
-          ? Object.keys(country.currencies)[0]
-          : "";
-        return currencyCode ? country.currencies[currencyCode].name : "";
-      }
+      case 6: 
+        return currencies[valuePos]|| "No Currency";
       default:
         return country.name.common || "";
     }
@@ -120,6 +119,9 @@ function OptionAnswer() {
     }
     else if (cont === 4) {
       return indexSubregions[pos];
+    }
+    else if (cont === 6) {
+      return indexCurrencies[pos];
     }
     else {
       if (currentPosition + 4 >= 250) {
@@ -137,14 +139,13 @@ function OptionAnswer() {
     const isCorrect =
       cont === 7 ? chosenIndex === continentSelected : 
       cont === 5 ? chosenIndex === languagesSelected : 
-      cont === 4 ? chosenIndex === subregionSelected : chosenIndex === questionPosition;
+      cont === 4 ? chosenIndex === subregionSelected :
+      cont === 6 ? currencySelected !== null && chosenIndex === currencySelected  : chosenIndex === questionPosition;
 
     setSelected(index);
     setAnswered(true);
 
-    if (isCorrect) {
-      setPoint((c) => c + 1);
-    }
+    if (isCorrect) setPoint((c) => c + 1);
   }
 
   function nextQuestion() {
@@ -173,6 +174,7 @@ function OptionAnswer() {
             ? valuePos === continentSelected
             : cont === 5 ? valuePos === languagesSelected 
             : cont === 4 ? valuePos === subregionSelected 
+            : cont === 6 ? valuePos === currencySelected 
             : valuePos === questionPosition;
 
         let className = "neutro";
