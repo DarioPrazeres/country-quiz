@@ -89,7 +89,7 @@ function App() {
             className="icon-World"
             src={worldIcon}
             id="iconWorld"
-            alt="World Picture with a little Boy"
+            alt="World with a little Boy"
           />
         </div>
 

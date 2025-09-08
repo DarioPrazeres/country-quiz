@@ -11,7 +11,7 @@ function Question() {
     )
 }
 function numberRandom(){
-    return 6;
+    return 9;
     //return Math.floor(Math.random()*8);
 }
 
@@ -21,7 +21,7 @@ function Asking(props) {
     var countries = props.countries;
     var value = props.value;
     const  t  = props.traslate;
-    countries && countries.map((e, i) => {        
+    countries && countries.forEach((e, i) => {        
         if (i === pos) {
             capital = e.capital;
             name = e.name.common;
@@ -55,6 +55,8 @@ function Asking(props) {
             return <p className="question-p"> {t("question_currency", {country: name})}</p>;
         case 8:
             return <p className="question-p"> {t("question_map", {country: name})}</p>;
+        case 9:
+            return <p className="question-p"> {t("question_borders", {country: name})}</p>;
         default:
             return <p className="question-p"> {t("question_continent", {country: name})}</p>;
     }
