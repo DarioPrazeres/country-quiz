@@ -87,8 +87,45 @@ function OptionAnswer() {
     return [];
   }, [currencySelected]);
 
+const borderSelected = useMemo(() => {
+  if (cont === 9 && data[questionPosition]) {
+    const borders = data[questionPosition].borders || [];
+    if (borders.length === 0) return "NO_BORDERS"; // marcador especial
+
+    const randomBorder = borders[Math.floor(Math.random() * borders.length)];
+    const borderIndex = data.findIndex(c => c.cca3 === randomBorder);
+
+    return borderIndex !== -1 ? borderIndex : null;
+  }
+  return null;
+}, [cont, questionPosition, data]);
+
+const indexBorders = useMemo(() => {
+  if (cont === 9) {
+    if (borderSelected === "NO_BORDERS") {
+      // opções: "NO_BORDERS" + 3 países aleatórios
+      const randomCountries = getArrayWithNumber(
+        Math.floor(Math.random() * data.length),
+        data.length
+      ).slice(0, 3);
+      const opts = [...randomCountries, "NO_BORDERS"];
+      return opts.sort(() => Math.random() - 0.5);
+    }
+    if (borderSelected !== null) {
+      return getArrayWithNumber(borderSelected, data.length);
+    }
+  }
+  return [];
+}, [cont, borderSelected, data]);
+
+
+
 
   function getOptionText(valuePos) {
+    if (cont === 9 && valuePos === "NO_BORDERS") {
+      return "No Borders"; // caso especial
+    }
+
     const country = data[valuePos];
     if (!country) return "";
 
@@ -103,12 +140,15 @@ function OptionAnswer() {
         return continents[valuePos];
       case 5:
         return languages[valuePos];
-      case 6: 
-        return currencies[valuePos]|| "No Currency";
+      case 6:
+        return currencies[valuePos] || "No Currency";
+      case 9:
+        return country.name.common;
       default:
         return country.name.common || "";
     }
   }
+
 
   function showOption(cont, pos, currentPosition) {
     if (cont === 7) {
@@ -123,6 +163,9 @@ function OptionAnswer() {
     else if (cont === 6) {
       return indexCurrencies[pos];
     }
+    else if (cont === 9) {
+      return indexBorders[pos];
+    }
     else {
       if (currentPosition + 4 >= 250) {
         return currentPosition - pos;
@@ -132,6 +175,7 @@ function OptionAnswer() {
     }
   }
 
+
   function handleSelect(index) {
     if (answered) return; 
     
@@ -140,7 +184,9 @@ function OptionAnswer() {
       cont === 7 ? chosenIndex === continentSelected : 
       cont === 5 ? chosenIndex === languagesSelected : 
       cont === 4 ? chosenIndex === subregionSelected :
-      cont === 6 ? currencySelected !== null && chosenIndex === currencySelected  : chosenIndex === questionPosition;
+      cont === 6 ? currencySelected !== null && chosenIndex === currencySelected :
+      cont === 9 ? chosenIndex === borderSelected : chosenIndex === questionPosition;
+
 
     setSelected(index);
     setAnswered(true);
@@ -170,12 +216,13 @@ function OptionAnswer() {
 
         const isChosen = selected === index;
         const isCorrect =
-          cont === 7
-            ? valuePos === continentSelected
-            : cont === 5 ? valuePos === languagesSelected 
-            : cont === 4 ? valuePos === subregionSelected 
-            : cont === 6 ? valuePos === currencySelected 
-            : valuePos === questionPosition;
+          cont === 7 ? valuePos === continentSelected
+          : cont === 5 ? valuePos === languagesSelected
+          : cont === 4 ? valuePos === subregionSelected
+          : cont === 6 ? valuePos === currencySelected
+          : cont === 9 ? valuePos === borderSelected
+          : valuePos === questionPosition;
+
 
         let className = "neutro";
         if (answered) {
