@@ -1,15 +1,14 @@
 import React, { createContext, useState, useMemo } from "react";
-import useFetch from "./component/useFecth";
-import Question from "./component/Question";
-import OptionAnswer, { numbers, numbersRandom } from "./component/OptionAnswer";
-import Result from "./component/Result";
-import worldIcon from "./img/world.svg";
-import dataOffline from "../data.json";
+import useFetch from "./hooks/useFecth";
+import Question from "./component/Question/Question";
+import OptionAnswer, { numbers, numbersRandom } from "./component/QuestionAnswer/OptionAnswer";
+import Result from "./component/Result/Result";
+import worldIcon from "./assets/img/world.svg";
+import dataOffline from "./data/data.json";
 import { useTranslation } from "react-i18next";
 
 export const ContContext = createContext();
 
-// constante global, não precisa recriar a cada render
 const CONTINENTS = [
   "Africa",
   "Asia",
@@ -25,6 +24,8 @@ function App() {
   const [point, setPoint] = useState(0);
   const [option, setOption] = useState(numbers());
   const [questionPosition, setQuestionPosition] = useState(numbersRandom());
+  const [showResult, setShowResult] = useState(false);
+  const [played, setPlayed] = useState(0);
   const { t } = useTranslation();
 
   const [dataAPI, error] = useFetch("https://restcountries.com/v3.1/all");
@@ -35,7 +36,7 @@ function App() {
       ...new Set(
         data
           .filter((c) => c.languages)
-          .map((c) => Object.values(c.languages)[0])
+          .flatMap((c) => Object.values(c.languages))
       ),
     ];
   }, [data]);
@@ -49,6 +50,8 @@ function App() {
       ),
     ];
   }, [data]);
+
+  currencies.push("No Currency")
 
   const subregions = useMemo(() => {
     return [
@@ -70,6 +73,10 @@ function App() {
         setPoint,
         continents: CONTINENTS,
         t,
+        showResult,
+        played, 
+        setPlayed,
+        setShowResult, 
         languages,
         currencies,
         subregions,
@@ -82,16 +89,18 @@ function App() {
             className="icon-World"
             src={worldIcon}
             id="iconWorld"
-            alt="World Picture with a little Boy"
+            alt="World with a little Boy"
           />
         </div>
 
-        <div id="nextQuestion" className="questionSection">
-          <Question />
-          <OptionAnswer />
-        </div>
-
-        <Result point={point} />
+        {!showResult ? (
+            <div className="questionSection">
+              <Question />
+              <OptionAnswer />
+            </div>
+          ) : (
+            <Result point={point} />
+          )}
       </section>
     </ContContext.Provider>
   );
