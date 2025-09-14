@@ -1,5 +1,4 @@
 {
-  "welcome": "Welcome, {{name}}. Thank you for visiting our website!",
   "create_by": "Created by ",
   "try_again": "Try again",
   "results": "Results",
@@ -9,5 +8,10 @@
   "question_flag": "This is the flag of which country?",
   "question_territory": "What is the land area of {{country}}?",
   "question_population": "What is the population of {{country}}?",
-  "question_continent": "Which continent does {{country}} belong to?"
+  "question_continent": "Which continent does {{country}} belong to?",
+  "question_language": "What is the official language of {{country}}?",
+  "question_currency": "What is the official currency of {{country}}?",
+  "question_region": "{{country}} belongs to which geographical region?",
+  "question_map": "Which country does the highlighted territory on this map belong to?",
+  "question_borders": "Which of these countries borders {{country}}?"
 }

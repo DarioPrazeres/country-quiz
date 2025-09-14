@@ -1,5 +1,4 @@
 {
-  "welcome": "Bem-vindo, {{name}}. Obrigado por acessar o nosso site!",
   "create_by": "Criado por ",
   "try_again": "Tente novamente",
   "results": "Resultados",
@@ -9,5 +8,10 @@
   "question_flag": "Esta é a bandeira de que país?",
   "question_territory": "Qual é a extensão territorial de {{country}}?",
   "question_population": "Qual é a população de {{country}}?",
-  "question_continent": "Em que continente {{country}} pertence?"
+  "question_continent": "A que continente {{country}} pertence?",
+  "question_language": "Qual é o idioma oficial de {{country}}?",
+  "question_currency": "Qual é a moeda oficial de {{country}}?",
+  "question_region": "{{country}} pertence a qual região geográfica?",
+  "question_map": "A que país pertence o território destacado neste mapa?",
+  "question_borders": "Qual destes países faz fronteira com {{country}}?"
 }

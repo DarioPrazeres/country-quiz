@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { ContContext } from "../../App";
 import { numberRandom } from "../Question/Question";
 
@@ -23,6 +23,29 @@ function OptionAnswer() {
 
   const [selected, setSelected] = useState(null); 
   const [answered, setAnswered] = useState(false); 
+  const [timeLeft, setTimeLeft] = useState(15);
+
+  useEffect(() => {
+    setTimeLeft(5);
+    setAnswered(false);
+    setSelected(null);
+  }, [questionPosition]);
+
+  useEffect(() => {
+    if (answered) return;
+
+    if(timeLeft <= 0) {
+      setAnswered(true);
+      setSelected(null);
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft((t) => t - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft, answered]);
 
   const continentSelected = useMemo(() => {
     if (cont === 7 && data[questionPosition]) {
@@ -117,7 +140,6 @@ function OptionAnswer() {
     return [];
   }, [cont, borderSelected, data]);
 
-
   function getOptionText(valuePos) {
     if (cont === 9 && valuePos === "NO_BORDERS") {
       return "No Borders"; // caso especial
@@ -190,6 +212,7 @@ function OptionAnswer() {
 
   function nextQuestion() {
     setQuestionPosition(numbersRandom());
+    setTimeLeft(5);
     setOption(numbers());
     setCont(numberRandom());
     setSelected(null);
@@ -204,6 +227,7 @@ function OptionAnswer() {
 
   return (
     <div className="option">
+      <div className="timer">⏱ {timeLeft}s</div>
       {option.map((opt, index) => {
         const valuePos = showOption(cont, opt, questionPosition);
         const text = getOptionText(valuePos);
