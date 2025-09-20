@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+function useFetch<T = unknown>(url: string): [T | null, string | null] {
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(url)
@@ -10,13 +10,13 @@ const useFetch = (url) => {
         if (!res.ok) {
           throw new Error(`Erro HTTP: ${res.status}`);
         }
-        return res.json();
+        return res.json() as Promise<T>;
       })
       .then((data) => setData(data))
-      .catch((err) => setError(err.message));
+      .catch((err: Error) => setError(err.message));
   }, [url]);
 
   return [data, error];
-};
+}
 
 export default useFetch;

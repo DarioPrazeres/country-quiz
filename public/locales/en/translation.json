@@ -13,5 +13,10 @@
   "question_currency": "What is the official currency of {{country}}?",
   "question_region": "{{country}} belongs to which geographical region?",
   "question_map": "Which country does the highlighted territory on this map belong to?",
-  "question_borders": "Which of these countries borders {{country}}?"
+  "question_borders": "Which of these countries borders {{country}}?",
+  "perfect_score": "Perfect score!",
+  "excellent": "Excellent!",
+  "good_job": "Good job!",
+  "not_bad": "Not bad!",
+  "keep_trying": "Keep trying!"
 }

@@ -1,10 +1,9 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import Footer from './component/Footer/Footer';
-import LanguageSelector from './component/LanguageSelector/LanguageSelector';
-import './assets/css/index.css';
-import './utils/i18n'; 
+import App from './App.tsx';
+import Footer from './component/Footer/Footer.tsx';
+import LanguageSelector from './component/LanguageSelector/LanguageSelector.tsx';
+import './assets/css/main.css';
+import './utils/i18n.ts'; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
