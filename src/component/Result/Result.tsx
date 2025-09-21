@@ -4,6 +4,7 @@ import cupIcon from "../../assets/img/cup.svg";
 import {generateRandomQuestionPosition, generateRandomOrder, numberRandom as generateRandomQuestionType} from "../../utils/gameUtils.ts";
 import {ResultProps, ScoreInfoProps} from "../../types/index.ts";
 import useFetch from "../../hooks/useFecth.ts";
+import useScore from "../../hooks/useScore.ts";
 import { ActionButtonsProps } from "../../types/index.ts";
 
 const ScoreInfo: React.FC<ScoreInfoProps> = ({ point, total, t }) => {
