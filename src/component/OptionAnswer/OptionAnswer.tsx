@@ -25,16 +25,18 @@ function OptionAnswer() {
     languages,
     subregions,
     currencies,
+    timeLeft,
+    answered,
+    setAnswered,
   } = useContext(ContContext) as ContContextType;
 
   const [selected, setSelected] = useState<number | null>(null);
-  const [answered, setAnswered] = useState(false);
 
   // Reset state on question change
   useEffect(() => {
     setSelected(null);
     setAnswered(false);
-  }, [questionPosition]);
+  }, [questionPosition, setAnswered]);
 
   const questionLogic = useQuestionLogic({
     cont,
@@ -43,13 +45,13 @@ function OptionAnswer() {
     continents,
     languages,
     subregions,
-    currencies
+    currencies,
   });
 
   const nextQuestion = useCallback(() => {
     setSelected(null);
     setAnswered(false);
-    
+
     setQuestionPosition(generateRandomQuestionPosition());
     setOption(generateRandomOrder());
     setCont(questionNumberRandom());
@@ -60,17 +62,7 @@ function OptionAnswer() {
     } else {
       setPlayed(played + 1);
     }
-  }, [played, setQuestionPosition, setOption, setCont, setShowResult, setPlayed]);
-
-  const handleTimeUp = useCallback(() => {
-    if (!answered) {
-      setAnswered(true);
-      setSelected(null);
-      // Do not call Next Question automatically
-    }
-  }, [answered]);
-
-  const timeLeft = useTimer({initialTime:15, questionPosition, answered, onTimeUp: handleTimeUp});
+  }, [played, setQuestionPosition, setOption, setCont, setShowResult, setPlayed, setAnswered]);
 
   const handleSelect = useCallback(
     (index: number) => {
@@ -103,7 +95,7 @@ function OptionAnswer() {
 
       if (correct) setPoint((c) => c + 1);
     },
-    [answered, cont, option, questionPosition, questionLogic, setPoint]
+    [answered, cont, option, questionPosition, questionLogic, setPoint, setAnswered]
   );
 
   return (

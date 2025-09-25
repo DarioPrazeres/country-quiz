@@ -1,4 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
+import { ContContext } from "../App.tsx";
+import { ContContextType } from "../types";
 
 interface UseTimerProps {
   initialTime?: number;
@@ -13,11 +15,11 @@ export function useTimer({
   answered,
   onTimeUp,
 }: UseTimerProps) {
-  const [timeLeft, setTimeLeft] = useState(initialTime);
+  const { timeLeft, setTimeLeft } = useContext(ContContext) as ContContextType;
+
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const timeUpCalledRef = useRef(false);
 
-  // Reset timer when question changes
   useEffect(() => {
     setTimeLeft(initialTime);
     timeUpCalledRef.current = false;
@@ -49,7 +51,7 @@ export function useTimer({
         intervalRef.current = null;
       }
     };
-  }, [questionPosition, answered, initialTime, onTimeUp]);
+  }, [questionPosition, answered, initialTime, onTimeUp, setTimeLeft]);
 
   return timeLeft;
 }

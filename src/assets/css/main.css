@@ -7,6 +7,7 @@
 @import './components.css';
 @import './timer.css';
 @import './question.css';
+@import './menu.css';
 
 .App {
   min-height: 100vh;

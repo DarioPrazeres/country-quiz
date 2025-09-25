@@ -41,6 +41,14 @@ export interface ContContextType {
   languages: string[];
   subregions: string[];
   currencies: string[];
+  t: (key: string, obj?: Record<string, any>) => string;
+  showResult: boolean;
+  point: number;
+  // Novos campos para controle do timer
+  answered?: boolean;
+  setAnswered?: React.Dispatch<React.SetStateAction<boolean>>;
+  timeLeft?: number;
+  setTimeLeft?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface OptionButtonProps {

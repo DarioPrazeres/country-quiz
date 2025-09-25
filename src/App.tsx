@@ -1,9 +1,11 @@
+// App.tsx - Com menu de navegação integrado
 import React, { createContext, useMemo } from "react";
 import Question from "./component/Question/Question.tsx";
 import OptionAnswer from "./component/OptionAnswer/OptionAnswer.tsx";
 import Result from "./component/Result/Result.tsx";
 import { QuizHeader } from "./component/QuizHeader/QuizHeader.tsx";
 import { ProgressBar } from "./component/ProgressBar/ProgressBar.tsx";
+import { NavigationMenu } from "./component/NavigationMenu/NavigationMenu.tsx";
 import { useTranslation } from "react-i18next";
 import { GameContentProps, ContContextType } from "./types/index.ts";
 import useGameData from "./hooks/useGameData.ts";
@@ -44,18 +46,28 @@ function App() {
   const gameState = useGameState();
   const gameData = useGameData();
 
+  const [timeLeft, setTimeLeft] = React.useState<number>(15);
+  const [answered, setAnswered] = React.useState<boolean>(false);
+
   const contextValue = useMemo<ContContextType>(() => ({
     ...gameState,
     ...gameData,
+    timeLeft,
+    setTimeLeft,
+    answered,
+    setAnswered,
     continents: CONTINENTS,
     t,
-  }), [gameState, gameData, t]);
+  }), [gameState, gameData, timeLeft, answered, t]);
 
   const currentQuestionNumber = gameState.played + 1;
 
   return (
     <ContContext.Provider value={contextValue}>
       <div className="App">
+        {/* Menu de navegação fixo */}
+        <NavigationMenu />
+        
         <div className="quiz-wrapper">
           <QuizHeader 
             currentQuestion={!gameState.showResult ? currentQuestionNumber : undefined}
