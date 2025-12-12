@@ -1,22 +1,31 @@
+// components/NavigationMenu.tsx - Com botão de tema Dark/Light
 import React, { useState, useRef, useEffect } from 'react';
+import { RouteType } from '../../hooks/UseRouter.ts';
+import { useTheme } from '../../hooks/useTheme.ts';
 
 interface MenuItem {
   id: string;
   label: string;
   icon: string;
   description?: string;
-  onClick: () => void;
+  route: RouteType;
   disabled?: boolean;
 }
 
 interface NavigationMenuProps {
   className?: string;
+  onNavigate: (route: RouteType) => void;
 }
 
-export const NavigationMenu: React.FC<NavigationMenuProps> = ({ className = '' }) => {
+export const NavigationMenu: React.FC<NavigationMenuProps> = ({ 
+  className = '', 
+  onNavigate 
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const { theme, changeTheme, getThemeIcon, getThemeLabel } = useTheme();
 
+  // Fechar menu ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -33,6 +42,7 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({ className = '' }
     };
   }, [isOpen]);
 
+  // Fechar menu com ESC
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -49,9 +59,13 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({ className = '' }
     };
   }, [isOpen]);
 
-  const handleMenuItemClick = (action: () => void) => {
-    action();
+  const handleMenuItemClick = (route: RouteType) => {
+    onNavigate(route);
     setIsOpen(false);
+  };
+
+  const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
+    changeTheme(newTheme);
   };
 
   const menuItems: MenuItem[] = [
@@ -60,41 +74,50 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({ className = '' }
       label: 'Login',
       icon: '👤',
       description: 'Sign in to your account',
-      onClick: () => {
-        console.log('Login clicked');
-      }
+      route: 'login'
     },
     {
       id: 'daily-challenge',
       label: 'Daily Challenge',
       icon: '🏆',
       description: 'Complete today\'s challenge',
-      onClick: () => {
-        console.log('Daily Challenge clicked');
-      }
+      route: 'daily-challenge'
     },
     {
       id: 'leaderboard',
       label: 'Leaderboard',
       icon: '📊',
       description: 'View top players',
-      onClick: () => {
-        console.log('Leaderboard clicked');
-      }
+      route: 'leaderboard'
     },
     {
       id: 'learning-mode',
       label: 'Learning Mode',
       icon: '📚',
       description: 'Practice without timer',
-      onClick: () => {
-        console.log('Learning Mode clicked');
-      }
+      route: 'learning-mode'
     }
   ];
 
   return (
     <div className={`navigation-menu ${className}`} ref={menuRef}>
+      {/* Botão de tema - sempre visível */}
+      <div className="theme-controls">
+        <button
+          className="theme-button"
+          onClick={() => {
+            const themes: ('light' | 'dark' | 'system')[] = ['light', 'dark', 'system'];
+            const currentIndex = themes.indexOf(theme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            handleThemeChange(themes[nextIndex]);
+          }}
+          title={`Current: ${getThemeLabel()}. Click to change.`}
+          aria-label={`Change theme. Currently ${getThemeLabel()}`}
+        >
+          <span className="theme-icon">{getThemeIcon()}</span>
+        </button>
+      </div>
+
       {/* Botão do menu */}
       <button
         className={`menu-trigger ${isOpen ? 'menu-trigger--active' : ''}`}
@@ -129,7 +152,7 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({ className = '' }
             <button
               key={item.id}
               className={`menu-item ${item.disabled ? 'menu-item--disabled' : ''}`}
-              onClick={() => handleMenuItemClick(item.onClick)}
+              onClick={() => handleMenuItemClick(item.route)}
               disabled={item.disabled}
               role="menuitem"
             >
@@ -150,6 +173,34 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({ className = '' }
           ))}
         </nav>
 
+        {/* Seção de tema no menu 
+        <div className="theme-section">
+          <div className="theme-section-header">
+            <h4>Theme Settings</h4>
+            <p>Choose your preferred appearance</p>
+          </div>
+          
+          <div className="theme-options">
+            {[
+              { key: 'light' as const, icon: '☀️', label: 'Light Mode' },
+              { key: 'dark' as const, icon: '🌙', label: 'Dark Mode' },
+              { key: 'system' as const, icon: '💻', label: 'System Theme' }
+            ].map((option) => (
+              <button
+                key={option.key}
+                className={`theme-option ${theme === option.key ? 'theme-option--active' : ''}`}
+                onClick={() => handleThemeChange(option.key)}
+              >
+                <span className="theme-option-icon">{option.icon}</span>
+                <span className="theme-option-label">{option.label}</span>
+                {theme === option.key && (
+                  <span className="theme-option-check">✓</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+*/}
         <div className="menu-footer">
           <div className="menu-footer-text">
             Country Quiz v1.0
