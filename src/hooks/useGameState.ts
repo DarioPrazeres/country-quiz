@@ -2,6 +2,7 @@ import { useState } from "react";
 import { generateRandomOrder, generateRandomQuestionPosition } from "../utils/gameUtils.ts";
 
 export default function useGameState() {
+  const [timeLeft, setTimeLeft] = useState(15);
   const [cont, setCont] = useState(0);
   const [point, setPoint] = useState(0);
   const [option, setOption] = useState(() => generateRandomOrder());
@@ -34,5 +35,7 @@ export default function useGameState() {
     played,
     setPlayed,
     resetGame,
+    timeLeft,
+    setTimeLeft,
   };
 }

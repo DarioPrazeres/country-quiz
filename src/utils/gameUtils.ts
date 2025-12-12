@@ -38,5 +38,6 @@ export function formatPopulation(population: number): string {
 }
 
 export function numberRandom(): number {
-  return Math.floor(Math.random() * 10);
+  return 9;
+  //return Math.floor(Math.random() * 10);
 }

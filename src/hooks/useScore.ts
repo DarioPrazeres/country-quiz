@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export function useScore(point: number, total: number) {
+export default function useScore(point: number, total: number) {
   return useMemo(() => {
     const percentage = total > 0 ? Math.round((point / total) * 100) : 0;
 

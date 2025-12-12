@@ -1,0 +1,166 @@
+/* styles/login.css - Estilos específicos para a página de login */
+
+/* ===== DEMO NOTICE ===== */
+.demo-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border: 1px solid #3b82f6;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-top: var(--space-6);
+  color: #1e40af;
+  font-size: var(--font-size-sm);
+}
+
+.demo-icon {
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+}
+
+.demo-text {
+  line-height: var(--leading-normal);
+}
+
+/* ===== MELHORIAS NO LOGIN FORM ===== */
+.login-form {
+  position: relative;
+}
+
+.login-submit-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #3730a3, #6d28d9);
+}
+
+/* ===== SOCIAL BUTTONS ESPECÍFICOS ===== */
+.social-button--google {
+  border-color: #ea4335;
+  color: #ea4335;
+}
+
+.social-button--google:hover {
+  background: #ea4335;
+  color: white;
+}
+
+.social-button--github {
+  border-color: #333;
+  color: white;
+}
+
+.social-button--github:hover {
+  background: #333;
+  color: white;
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: var(--radius-sm);
+}
+
+/* ===== FEATURES GRID MELHORADA ===== */
+.login-features h3 {
+  text-align: center;
+  margin-bottom: var(--space-6);
+  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+}
+
+.feature-text strong {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
+}
+
+.feature-text p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--leading-normal);
+}
+
+/* ===== ANIMAÇÕES ESPECÍFICAS ===== */
+.login-form-wrapper {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.social-login {
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.login-features {
+  animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+.demo-notice {
+  animation: slideInUp 0.6s ease-out 0.6s both;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== MELHORIAS DE ACESSIBILIDADE ===== */
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  border-color: var(--border-focus);
+}
+
+.checkbox-label:hover .checkbox-custom {
+  border-color: var(--border-focus);
+}
+
+.social-button:focus {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ===== ESTADOS DE ERROR ===== */
+.form-input--error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.form-error::before {
+  content: '⚠️';
+  font-size: var(--font-size-xs);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 640px) {
+  .login-container {
+    max-width: none;
+  }
+  
+  .social-buttons {
+    flex-direction: column;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .demo-notice {
+    flex-direction: column;
+    text-align: center;
+  }
+}

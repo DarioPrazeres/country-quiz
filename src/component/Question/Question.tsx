@@ -7,22 +7,20 @@ import { useTimer } from "../../hooks/useTimer.tsx";
 import {  AskingProps, ContContextType } from "../../types/index.ts";
 
 function Question() {
-  const context = useContext(ContContext) as ContContextType;
-  const { questionPosition, cont, data, t } = context;
-  
-  const [answered, setAnswered] = useState(false);
+  const { questionPosition, cont, data, t, answered, setAnswered } =
+    useContext(ContContext) as ContContextType;
 
   const handleTimeUp = useCallback(() => {
     if (!answered) {
       setAnswered(true);
     }
-  }, [answered]);
+  }, [answered, setAnswered]);
 
-  const timeLeft = useTimer({ 
-    initialTime: 15, 
-    questionPosition, 
-    answered, 
-    onTimeUp: handleTimeUp 
+  const timeLeft = useTimer({
+    initialTime: 15,
+    questionPosition,
+    answered,
+    onTimeUp: handleTimeUp,
   });
 
   return (
@@ -31,18 +29,19 @@ function Question() {
         <Timer timeLeft={timeLeft} />
         <QuestionType type={cont} />
       </div>
-      
+
       <div className="question-content">
-        <Asking 
-          countries={data} 
-          value={cont} 
-          pos={questionPosition} 
-          traslate={t} 
+        <Asking
+          countries={data}
+          value={cont}
+          pos={questionPosition}
+          traslate={t}
         />
       </div>
     </div>
   );
 }
+
 
 function Asking({ countries, value, pos, traslate }: AskingProps) {
   if (!countries || !countries[pos]) {
