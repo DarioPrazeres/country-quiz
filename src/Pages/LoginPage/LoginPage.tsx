@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BasePage } from '../../component/BasePage/BasePage.tsx';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../context/AuthContext.tsx';
 
 interface LoginPageProps {
   onBack: () => void;
 }
 
+// Declaração global para o Google SDK
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 export const LoginPage: React.FC<LoginPageProps> = ({ onBack }) => {
   const { t } = useTranslation();
+  const { login, loginWithOAuth } = useAuth();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -16,6 +25,19 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack }) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Carregar Google SDK
+  useEffect(() => {
+    const loadGoogleSDK = () => {
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    };
+
+    loadGoogleSDK();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -54,23 +76,100 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack }) => {
     if (!validateForm()) return;
     
     setIsLoading(true);
+    setErrors({});
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log('Login attempt:', formData);
+      alert("Entrei Login")
+      await login(formData.email, formData.password, formData.rememberMe);
       alert(t('login.success'));
       onBack();
     } catch (error) {
       console.error('Login error:', error);
-      setErrors({ general: t('login.loginFailed') });
+      setErrors({ 
+        general: error instanceof Error ? error.message : t('login.loginFailed')
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSocialLogin = (provider: string) => {
-    console.log(`${provider} login clicked`);
-    alert(`${provider} login seria implementado aqui`);
+  const handleSocialLogin = async (provider: string) => {
+    console.log(`${provider} login iniciado`);
+    
+    if (provider.toLowerCase() === 'google') {
+      try {
+        setIsLoading(true);
+
+        // Verificar se o Google SDK está carregado
+        if (!window.google) {
+          alert('Google SDK ainda não foi carregado. Tente novamente em alguns segundos.');
+          return;
+        }
+
+        // Configurar e mostrar o One Tap
+        window.google.accounts.id.initialize({
+          client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID',
+          callback: async (response: any) => {
+            try {
+              console.log('Google response recebido:', response);
+              
+              // Decodificar o token JWT do Google
+              const token = response.credential;
+              const payload = decodeGoogleToken(token);
+              
+              console.log('Google payload:', payload);
+
+              // Fazer login com OAuth na sua API
+              await loginWithOAuth(
+                'google',
+                token,
+                payload.email,
+                payload.name,
+                payload.picture
+              );
+
+              alert('Login com Google realizado com sucesso!');
+              onBack();
+            } catch (error) {
+              console.error('Erro no login do Google:', error);
+              alert('Erro ao fazer login com Google: ' + (error instanceof Error ? error.message : 'Erro desconhecido'));
+            } finally {
+              setIsLoading(false);
+            }
+          },
+        });
+
+        // Mostrar o prompt do Google One Tap
+        window.google.accounts.id.prompt();
+        
+      } catch (error) {
+        console.error('Erro ao iniciar login do Google:', error);
+        alert('Erro ao iniciar login com Google');
+        setIsLoading(false);
+      }
+    } else if (provider.toLowerCase() === 'github') {
+      alert('Login com GitHub ainda não implementado. Configure o OAuth do GitHub primeiro.');
+    } else {
+      alert(`${provider} login ainda não implementado`);
+    }
+  };
+
+  // Função auxiliar para decodificar o JWT do Google
+  const decodeGoogleToken = (token: string) => {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      console.error('Erro ao decodificar token:', error);
+      return null;
+    }
   };
 
   return (
